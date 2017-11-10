@@ -6,4 +6,11 @@ package com.example.inventorymaterial.iu.login;
 
 public interface LoginInteractor {
     void validateCredentials(String user, String password);
+
+    interface OnLoginFinishedListener{
+        void onUserEmptyError();
+        void onPasswordEmptyError();
+        void onPasswordError();
+        void onSuccess();
+    }
 }
