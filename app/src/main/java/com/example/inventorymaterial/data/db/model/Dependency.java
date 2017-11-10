@@ -1,4 +1,4 @@
-package com.example.inventorymaterial.pojo;
+package com.example.inventorymaterial.data.db.model;
 
 /**
  * Created by usuario on 25/10/17.

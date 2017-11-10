@@ -3,7 +3,7 @@
     package="com.example.inventorymaterial">
 
     <application
-        android:name=".InventoryApplication"
+        android:name=".iu.inventory.InventoryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,17 +18,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".iu.login.LoginViewImpl"
             android:theme="@style/LoginTheme" />
-        <activity android:name=".InventoryActivity" />
+        <activity android:name=".iu.inventory.InventoryActivity" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".ProductActivity" />
-        <activity android:name=".DependecyActivity" />
-        <activity android:name=".SectorActivity" />
-        <activity android:name=".GeneralSettingActivity" />
-        <activity android:name=".AccountSettingActivity" />
-        <activity android:name=".AboutUsActivity" />
-        <activity android:name=".AddDependencyActivity"></activity>
+        <activity android:name=".iu.product.ProductActivity" />
+        <activity android:name=".iu.dependency.DependecyActivity" />
+        <activity android:name=".iu.sector.SectorActivity" />
+        <activity android:name=".iu.prefs.GeneralSettingActivity" />
+        <activity android:name=".iu.prefs.AccountSettingActivity" />
+        <activity android:name=".iu.about.AboutUsActivity" />
+        <activity android:name=".iu.dependency.AddDependencyActivity"></activity>
     </application>
 
 </manifest>

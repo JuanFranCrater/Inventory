@@ -1,8 +1,10 @@
-package com.example.inventorymaterial;
+package com.example.inventorymaterial.iu.dependency;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
+import com.example.inventorymaterial.R;
 
 
 public class AddDependencyActivity extends AppCompatActivity {

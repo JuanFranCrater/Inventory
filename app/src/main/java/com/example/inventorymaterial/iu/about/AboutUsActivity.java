@@ -1,4 +1,4 @@
-package com.example.inventorymaterial;
+package com.example.inventorymaterial.iu.about;
 
 import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;

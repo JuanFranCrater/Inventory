@@ -1,7 +1,9 @@
-package com.example.inventorymaterial;
+package com.example.inventorymaterial.iu.inventory;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.inventorymaterial.R;
 
 
 /*

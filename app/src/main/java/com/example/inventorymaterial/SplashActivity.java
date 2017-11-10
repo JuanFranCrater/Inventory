@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.inventorymaterial.R;
+import com.example.inventorymaterial.iu.login.LoginViewImpl;
 
 /*
 Esta activity es un Splash que se muestra al inicio de nuestra aplicacion(desactivada actualmente)
@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void llamarLogin()
     {
-        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        Intent intent = new Intent(SplashActivity.this, LoginViewImpl.class);
 
         startActivity(intent);
     }

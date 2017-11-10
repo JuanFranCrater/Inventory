@@ -10,7 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.inventorymaterial.R;
+import com.example.inventorymaterial.iu.dependency.DependecyActivity;
+import com.example.inventorymaterial.iu.inventory.InventoryActivity;
+import com.example.inventorymaterial.iu.prefs.AccountSettingActivity;
+import com.example.inventorymaterial.iu.prefs.GeneralSettingActivity;
+import com.example.inventorymaterial.iu.product.ProductActivity;
+import com.example.inventorymaterial.iu.sector.SectorActivity;
 
 /*
 Esta activity gestiona el menus DashBoard con los distintos modulos de Inventory

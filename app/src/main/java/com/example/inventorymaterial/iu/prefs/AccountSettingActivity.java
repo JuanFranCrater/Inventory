@@ -1,17 +1,17 @@
-package com.example.inventorymaterial;
+package com.example.inventorymaterial.iu.prefs;
 
 import android.preference.PreferenceActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.inventorymaterial.R;
-public class GeneralSettingActivity extends PreferenceActivity {
+
+public class AccountSettingActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.general_setting);
-
+        addPreferencesFromResource(R.xml.account_settings);
     }
 }
