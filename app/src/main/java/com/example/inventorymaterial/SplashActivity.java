@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.inventorymaterial.iu.login.LoginViewImpl;
+import com.example.inventorymaterial.ui.login.LoginViewImpl;
 
 /*
 Esta activity es un Splash que se muestra al inicio de nuestra aplicacion(desactivada actualmente)

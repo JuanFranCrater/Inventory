@@ -2,12 +2,14 @@ package com.example.inventory;
 
 import com.example.inventorymaterial.data.db.model.User;
 import com.example.inventorymaterial.data.db.repository.UserRepository;
+import com.example.inventorymaterial.ui.utils.CommonUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -36,8 +38,6 @@ public class ExampleUnitTest {
                 true,false));
     }
 
-
-
     //1.3 El usuario existe en la base de datos(Repository)
     //Para realizar esta prueba se debe Poder comparar dos objetos Usuario
     @Test
@@ -64,13 +64,11 @@ public class ExampleUnitTest {
     }
 
 
-
     @Test
     public void SignIn_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
 
     }
-
 
 
     /*
@@ -93,21 +91,21 @@ public class ExampleUnitTest {
         assertSame(user,user3);
     }
 
-
-
-
-
-
     //2.5 El email no existe en la base de datos (Repository)
 
     //2.6 El usuario no existe en la base de datos(Repositoy
 
 
-
-
     @Test
     public void SignUp_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
+    }
+    public void isPasswordValid()
+    {
+        CommonUtils.isPasswordValid("contraseña");
+        CommonUtils.isPasswordValid("Contraseña");
+        CommonUtils.isPasswordValid("Cont1");
+        CommonUtils.isPasswordValid("Contraseña1");
 
     }
 }

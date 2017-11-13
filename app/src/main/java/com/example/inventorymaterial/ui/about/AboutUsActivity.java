@@ -1,6 +1,5 @@
-package com.example.inventorymaterial.iu.about;
+package com.example.inventorymaterial.ui.about;
 
-import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 

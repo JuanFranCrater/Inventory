@@ -10,12 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.inventorymaterial.iu.dependency.DependecyActivity;
-import com.example.inventorymaterial.iu.inventory.InventoryActivity;
-import com.example.inventorymaterial.iu.prefs.AccountSettingActivity;
-import com.example.inventorymaterial.iu.prefs.GeneralSettingActivity;
-import com.example.inventorymaterial.iu.product.ProductActivity;
-import com.example.inventorymaterial.iu.sector.SectorActivity;
+import com.example.inventorymaterial.ui.dependency.DependecyActivity;
+import com.example.inventorymaterial.ui.inventory.InventoryActivity;
+import com.example.inventorymaterial.ui.prefs.AccountSettingActivity;
+import com.example.inventorymaterial.ui.prefs.GeneralSettingActivity;
+import com.example.inventorymaterial.ui.product.ProductActivity;
+import com.example.inventorymaterial.ui.sector.SectorActivity;
 
 /*
 Esta activity gestiona el menus DashBoard con los distintos modulos de Inventory
@@ -34,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        gridDashboard=(GridLayout) findViewById(R.id.gridDashboard);
+        gridDashboard=(GridLayout) findViewById(R.id.gridLayout);
 
         //Definir un array de int, que contendrá el id de las imágenes Inventory, Product, Dependenicas, Secciones y Preferencias
         int[] images = {

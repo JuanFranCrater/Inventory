@@ -33,6 +33,8 @@ public class UserRepository {
                 false,false));
         addUser(new User(3,"Pepe","pepe","Pepe Garcia","PepeCorreo@falso.es",
                 true,false));
+        addUser(new User(4,"Lourdes","Lourdes1", "Lourdes","correo",
+                false,false));
 
     }
 
@@ -65,6 +67,14 @@ public class UserRepository {
      */
     public boolean isUserExits(User user)
     {
-    return true;
+    return users.contains(user);
+    }
+    public boolean validateCredentials(String user, String password)
+    {
+        if()
+        {
+
+        }
+        return true;
     }
 }

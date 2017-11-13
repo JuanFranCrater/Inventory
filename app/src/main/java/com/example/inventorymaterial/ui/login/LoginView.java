@@ -1,4 +1,4 @@
-package com.example.inventorymaterial.iu.login;
+package com.example.inventorymaterial.ui.login;
 
 /**
  * Created by usuario on 10/11/17.

@@ -1,4 +1,4 @@
-package com.example.inventorymaterial.iu.dependency;
+package com.example.inventorymaterial.ui.dependency;
 
 import android.content.Intent;
 import android.os.Bundle;
