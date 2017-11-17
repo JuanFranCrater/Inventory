@@ -69,7 +69,6 @@ public class DependencyRepository {
     {
         Collections.sort(dependencies);
         //Collections.sort(dependencies, new Dependency.DependencyOrderByShortName());
-
         return dependencies;
     }
 }
