@@ -74,13 +74,14 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.edtUser)).perform(typeText("lourdes"),closeSoftKeyboard());
         onView(withId(R.id.edtPassword)).perform(typeText("lu"),closeSoftKeyboard());
         onView(withId(R.id.btnSignIN)).perform(click());
-        checkSnackBarDisplayByMessage(R.string.errorPasswordEmpty);
+        checkSnackBarDisplayByMessage(R.string.errorPasswordLength);
     }
 
     @Test
     public void passwordDoubleCheck () {
 
     }
+
     private void checkSnackBarDisplayByMessage(@StringRes int message) {
         onView(withText(message)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 

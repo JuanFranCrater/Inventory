@@ -3,6 +3,7 @@ package com.example.inventorymaterial.repository;
 import com.example.inventorymaterial.pojo.Dependency;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by
@@ -57,6 +58,7 @@ public class DependencyRepository {
 
     public ArrayList<Dependency> getDependencies()
     {
+        Collections.sort(dependencies);
         return dependencies;
     }
 }

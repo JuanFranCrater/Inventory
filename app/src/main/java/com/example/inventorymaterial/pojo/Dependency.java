@@ -1,10 +1,12 @@
 package com.example.inventorymaterial.pojo;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by usuario on 25/10/17.
  */
 
-public class  Dependency {
+public class  Dependency implements Comparable {
     private int _ID;
     private String name;
     private String shortname;
@@ -52,5 +54,10 @@ public class  Dependency {
         this.name = name;
         this.shortname = shortname;
         this.description = description;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return name.compareTo(((Dependency)o).getName());
     }
 }
