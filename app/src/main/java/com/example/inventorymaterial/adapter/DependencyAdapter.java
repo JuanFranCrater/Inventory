@@ -13,13 +13,21 @@ import com.example.inventorymaterial.R;import com.example.inventorymaterial.data
 import com.example.inventorymaterial.data.db.repository.DependencyRepository;
 import com.github.ivbaranov.mli.MaterialLetterIcon;
 
+import java.util.ArrayList;
+
 /**
  * Created by usuario on 26/10/17.
  */
 
 public class DependencyAdapter extends ArrayAdapter<Dependency> {
+    /**
+     * Se crea una copia del ArrayList que se tiene en DependencyRepository
+     * para tener una copia local en el Adapter que se pueda modificar sin cambiar los datos originales
+     * @param context
+     */
     public DependencyAdapter(@NonNull Context context) {
-        super(context, R.layout.item_dependency, DependencyRepository.getInstance().getDependencies());
+        super(context, R.layout.item_dependency, new ArrayList<Dependency>(DependencyRepository.getInstance().getDependencies()));
+        sort(new Dependency.DependencyOrderByShortName());
     }
 
     @NonNull

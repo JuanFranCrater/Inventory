@@ -3,6 +3,7 @@ package com.example.inventorymaterial.data.db.repository;
 import com.example.inventorymaterial.data.db.model.Dependency;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by
@@ -32,10 +33,19 @@ public class DependencyRepository {
     //Metodos
 
     private void initialize() {
+        addDependency(new Dependency(2, "2 Cliclo Formativo Grado Superior", "2CFGS",
+                "2CFGS Desarrollo Aplicaciones Multiplataforma"));
+        addDependency(new Dependency(1, "1 Cliclo Formativo Grado Superior", "1CFGS",
+                "1CFGS Desarrollo Aplicaciones Multiplataforma"));
         addDependency(new Dependency(1, "1 Cliclo Formativo Grado Superior", "1CFGS",
                 "1CFGS Desarrollo Aplicaciones Multiplataforma"));
         addDependency(new Dependency(2, "2 Cliclo Formativo Grado Superior", "2CFGS",
                 "2CFGS Desarrollo Aplicaciones Multiplataforma"));
+        addDependency(new Dependency(2, "2 Cliclo Formativo Grado Superior", "2CFGS",
+                "2CFGS Desarrollo Aplicaciones Multiplataforma"));
+        addDependency(new Dependency(1, "1 Cliclo Formativo Grado Superior", "1CFGS",
+                "1CFGS Desarrollo Aplicaciones Multiplataforma"));
+
     }
 
     public static DependencyRepository getInstance() {
@@ -57,6 +67,8 @@ public class DependencyRepository {
 
     public ArrayList<Dependency> getDependencies()
     {
+        Collections.sort(dependencies);
+        //Collections.sort(dependencies, new Dependency.DependencyOrderByShortName());
         return dependencies;
     }
 }
