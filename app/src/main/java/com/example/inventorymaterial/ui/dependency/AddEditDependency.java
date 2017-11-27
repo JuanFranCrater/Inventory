@@ -2,6 +2,7 @@ package com.example.inventorymaterial.ui.dependency;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,7 +26,6 @@ import com.example.inventorymaterial.ui.dependency.contrat.AddEditInteractor;
  */
 
 public class AddEditDependency extends BaseFragment implements AddEditContrat.View {
-    AddNewDependencyClickListener callback;
     TextInputLayout tilname;
     TextInputLayout tilshortname;
     TextInputLayout tildescription;
@@ -79,19 +79,18 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
                 presenter.validatedependency(tilname.getEditText().getText().toString(),tilshortname.getEditText().getText().toString(),tilshortname.getEditText().getText().toString());
             }
         });
-        if(getArguments()!=null)//es editar
-        {
 
-        }
+        if(getArguments()!=null)//es editar
+        {}
         return rootView;
     }
 
 
     @Override
     public void showListDependency() {
-        addingCorrectDependency();
         showMessage("Dependency saved");
-
+        FragmentManager fragMa = getFragmentManager();
+        fragMa.popBackStack();
         //getActivity().finish();
         //startActivity(getActivity().getIntent());
 
@@ -135,36 +134,4 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
         onError("NO description bitch");
     }
 
-    @Override
-    public void addingCorrectDependency() {
-
-        /* TODO Delegar a Presenter -> Interactor
-        Dependency newDep = new Dependency(0, tID_DependencyName.getText().toString(),
-                tID_DependencyShortname.getText().toString(),
-                tID_DependencyDescription.getText().toString());
-        DependencyRepository.getInstance().addDependency(newDep);
-        */
-        callback.returnToDependencyList();
-    }
-
-    /**
-     *
-     * Si no está implementada la interfaz, saltará excepción
-     */
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            callback = (AddNewDependencyClickListener) activity;
-        } catch (ClassCastException e)
-        {
-           // throw new ClassCastException(getActivity().getLocalClassName() + "must be implemented");
-        }
-    }
-
-    interface AddNewDependencyClickListener
-    {
-        void returnToDependencyList();
-    }
 }

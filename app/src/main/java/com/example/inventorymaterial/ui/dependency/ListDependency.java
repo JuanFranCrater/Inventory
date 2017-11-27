@@ -23,7 +23,7 @@ import java.util.List;
  * Created by usuario on 23/11/17.
  */
 
-public class ListDependency extends ListFragment implements ListDependencyContrat.View , AddEditDependency.AddNewDependencyClickListener {
+public class ListDependency extends ListFragment implements ListDependencyContrat.View  {
 
     public static final String TAG="listdependency";
     private ListDependencyListener callback;
@@ -33,12 +33,6 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     @Override
     public void setPresenter(BasePresenter presenter) {
       this.presenter= (ListDependencyContrat.Presenter) presenter;
-    }
-
-    @Override
-    public void returnToDependencyList() {
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.popBackStack();
     }
 
     interface ListDependencyListener{
@@ -52,7 +46,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
             callback=(ListDependencyListener)activity;
         }catch (ClassCastException e)
         {
-            throw new ClassCastException(activity.toString()+" must implements ListDependencyListener");
+            // throw new ClassCastException(activity.toString()+" must implements ListDependencyListener");
         }
     }
 
