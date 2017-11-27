@@ -1,11 +1,14 @@
 package com.example.inventorymaterial.ui.dependency;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +25,7 @@ import com.example.inventorymaterial.ui.dependency.contrat.AddEditInteractor;
  */
 
 public class AddEditDependency extends BaseFragment implements AddEditContrat.View {
-
-
+    AddNewDependencyClickListener callback;
     TextInputLayout tilname;
     TextInputLayout tilshortname;
     TextInputLayout tildescription;
@@ -52,6 +54,22 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
         FloatingActionButton fab = rootView.findViewById(R.id.fab);
         tilname = rootView.findViewById(R.id.tilName);
         edtName= rootView.findViewById(R.id.edtName);
+        edtName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                edtName.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         tilshortname = rootView.findViewById(R.id.tilShorname);
         tildescription = rootView.findViewById(R.id.tilDescription);
@@ -71,10 +89,11 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
 
     @Override
     public void showListDependency() {
-
+        addingCorrectDependency();
         showMessage("Dependency saved");
-        getActivity().finish();
-        startActivity(getActivity().getIntent());
+
+        //getActivity().finish();
+        //startActivity(getActivity().getIntent());
 
     }
 
@@ -114,5 +133,38 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
     @Override
     public void setDescriptionEmptyError() {
         onError("NO description bitch");
+    }
+
+    @Override
+    public void addingCorrectDependency() {
+
+        /* TODO Delegar a Presenter -> Interactor
+        Dependency newDep = new Dependency(0, tID_DependencyName.getText().toString(),
+                tID_DependencyShortname.getText().toString(),
+                tID_DependencyDescription.getText().toString());
+        DependencyRepository.getInstance().addDependency(newDep);
+        */
+        callback.returnToDependencyList();
+    }
+
+    /**
+     *
+     * Si no está implementada la interfaz, saltará excepción
+     */
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            callback = (AddNewDependencyClickListener) activity;
+        } catch (ClassCastException e)
+        {
+           // throw new ClassCastException(getActivity().getLocalClassName() + "must be implemented");
+        }
+    }
+
+    interface AddNewDependencyClickListener
+    {
+        void returnToDependencyList();
     }
 }

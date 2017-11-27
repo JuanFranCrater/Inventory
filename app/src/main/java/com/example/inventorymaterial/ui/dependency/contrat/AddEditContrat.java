@@ -10,6 +10,7 @@ import com.example.inventorymaterial.ui.base.BaseView;
 public interface AddEditContrat {
     interface View extends BaseView
     {
+        void addingCorrectDependency();
         void showListDependency();
         void showErrorName();
         void showErrorShortName();
