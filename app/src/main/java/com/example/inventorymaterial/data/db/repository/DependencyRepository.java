@@ -33,17 +33,17 @@ public class DependencyRepository {
     //Metodos
 
     private void initialize() {
-        addDependency(new Dependency(2, "2 Cliclo Formativo Grado Superior", "2CFGS",
+        addDependency(new Dependency(1, "2 Cliclo Formativo Grado Superior", "2CFGS",
                 "2CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(1, "1 Cliclo Formativo Grado Superior", "1CFGS",
+        addDependency(new Dependency(2, "1 Cliclo Formativo Grado Superior", "1CFGS",
                 "1CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(1, "1 Cliclo Formativo Grado Superior", "1CFGS",
+        addDependency(new Dependency(3, "1 Cliclo Formativo Grado Superior", "1CFGS",
                 "1CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(2, "2 Cliclo Formativo Grado Superior", "2CFGS",
+        addDependency(new Dependency(4, "2 Cliclo Formativo Grado Superior", "2CFGS",
                 "2CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(2, "2 Cliclo Formativo Grado Superior", "2CFGS",
+        addDependency(new Dependency(5, "2 Cliclo Formativo Grado Superior", "2CFGS",
                 "2CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(1, "1 Cliclo Formativo Grado Superior", "1CFGS",
+        addDependency(new Dependency(6, "1 Cliclo Formativo Grado Superior", "1CFGS",
                 "1CFGS Desarrollo Aplicaciones Multiplataforma"));
 
     }

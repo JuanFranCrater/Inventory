@@ -64,7 +64,7 @@ public class  Dependency implements Comparable {
         El ArrayList se ordena segun el criterio/s del método compareTo
         de la interfaz Comparable
          */
-        return name.compareTo(((Dependency)o).getName());
+        return shortname.compareTo(((Dependency)o).getShortname());
     }
    public static class DependencyOrderByShortName implements Comparator<Dependency>
     {
