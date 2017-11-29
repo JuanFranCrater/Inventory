@@ -1,9 +1,6 @@
 package com.example.inventorymaterial.ui.dependency;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,20 +13,18 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.inventorymaterial.R;
+import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.ui.base.BaseFragment;
 import com.example.inventorymaterial.ui.base.BasePresenter;
 import com.example.inventorymaterial.ui.dependency.contrat.AddEditContrat;
-import com.example.inventorymaterial.ui.dependency.contrat.AddEditInteractor;
-
-/**
- * Created by usuario on 23/11/17.
- */
+import com.example.inventorymaterial.ui.utils.AddEdit;
 
 public class AddEditDependency extends BaseFragment implements AddEditContrat.View {
     TextInputLayout tilname;
     TextInputLayout tilshortname;
     TextInputLayout tildescription;
     EditText edtName;
+    static AddEdit mode;
     public static final String TAG="addeditdependency";
     private AddEditContrat.Presenter presenter;
 
@@ -40,7 +35,13 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
     }
     public static AddEditDependency newInstance(Bundle arguments) {
         AddEditDependency addEditDependency = new AddEditDependency();
+        mode=new AddEdit();
         if(arguments!=null)
+        {
+            mode.setMode(AddEdit.EDIT_MODE);
+        }
+
+        if(mode.getMode()==AddEdit.EDIT_MODE)
         {
             addEditDependency.setArguments(arguments);
         }
@@ -76,12 +77,18 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                presenter.validatedependency(tilname.getEditText().getText().toString(),tilshortname.getEditText().getText().toString(),tilshortname.getEditText().getText().toString());
+                presenter.validatedependency(tilname.getEditText().getText().toString(),tilshortname.getEditText().getText().toString(),tildescription.getEditText().getText().toString());
             }
         });
 
         if(getArguments()!=null)//es editar
-        {}
+        {
+            tilname.setEnabled(false);
+            tilname.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getName());
+            tilshortname.setEnabled(false);
+            tilshortname.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getShortname());
+            tildescription.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getDescription());
+        }
         return rootView;
     }
 

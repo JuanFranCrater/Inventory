@@ -9,6 +9,7 @@ import com.example.inventorymaterial.R;
 import com.example.inventorymaterial.ui.base.BaseActivity;
 import com.example.inventorymaterial.ui.dependency.presenter.AddEditDependencyPresenterImpl;
 import com.example.inventorymaterial.ui.dependency.presenter.ListDependencyPresenterImpl;
+import com.example.inventorymaterial.ui.utils.AddEdit;
 
 /**
  * Created by usuario on 25/10/17.
@@ -21,6 +22,7 @@ public class DependecyActivity extends BaseActivity implements ListDependency.Li
     private AddEditDependency addeditDependency;
     private AddEditDependencyPresenterImpl addEditPresenter;
     private DetailDependency detailDependency;
+
 
 
     @Override
@@ -43,17 +45,24 @@ public class DependecyActivity extends BaseActivity implements ListDependency.Li
 
         //3.Si necesitamos, se asigna el presentador a su fragment
         listDependency.setPresenter(listPresenter);
-
     }
 
     @Override
-    public void addNewDependency() {
+    public void addNewDependency(Bundle bnd) {
+
         FragmentManager fraMag = getFragmentManager();
         FragmentTransaction fraTra = fraMag.beginTransaction();
         addeditDependency = (AddEditDependency)fraMag.findFragmentByTag(AddEditDependency.TAG);
         if(addeditDependency==null)
         {
-            addeditDependency= AddEditDependency.newInstance(null);
+            if(bnd != null)
+            {
+                addeditDependency = AddEditDependency.newInstance(bnd);
+            }
+            else
+            {
+                addeditDependency = AddEditDependency.newInstance(null);
+            }
             fraTra.replace(android.R.id.content,addeditDependency,AddEditDependency.TAG);
             fraTra.addToBackStack(null);
             fraTra.commit();

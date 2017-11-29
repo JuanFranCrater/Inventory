@@ -1,6 +1,9 @@
 package com.example.inventorymaterial.data.db.repository;
 
+import android.util.Log;
+
 import com.example.inventorymaterial.data.db.model.Dependency;
+import com.example.inventorymaterial.data.db.model.Sector;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,18 +36,14 @@ public class DependencyRepository {
     //Metodos
 
     private void initialize() {
-        addDependency(new Dependency(1, "2 Cliclo Formativo Grado Superior", "2CFGS",
-                "2CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(2, "1 Cliclo Formativo Grado Superior", "1CFGS",
+        addDependency(new Dependency(1, "1 Cliclo Formativo Grado Superior", "1CFGS",
                 "1CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(3, "1 Cliclo Formativo Grado Superior", "1CFGS",
-                "1CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(4, "2 Cliclo Formativo Grado Superior", "2CFGS",
+        addDependency(new Dependency(2, "2 Cliclo Formativo Grado Superior", "2CFGS",
                 "2CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(5, "2 Cliclo Formativo Grado Superior", "2CFGS",
-                "2CFGS Desarrollo Aplicaciones Multiplataforma"));
-        addDependency(new Dependency(6, "1 Cliclo Formativo Grado Superior", "1CFGS",
-                "1CFGS Desarrollo Aplicaciones Multiplataforma"));
+        addDependency(new Dependency(3, "1 Cliclo Formativo Grado Medio", "1CFGS",
+                "1CFGM Desarrollo Aplicaciones Multiplataforma"));
+        addDependency(new Dependency(4, "2 Cliclo xcx Grado Medio", "2CFGM",
+                "2CFGM Desarrollo Aplicaciones Multiplataforma"));
 
     }
 
@@ -64,7 +63,28 @@ public class DependencyRepository {
         dependencies.add(dependency);
 
     }
-
+    public void editDependency(int id, String name, String shortname, String description) {
+        for (int i = 0; i < dependencies.size(); i++)
+        {
+            if((dependencies.get(i).get_ID() == id))
+            {
+                dependencies.get(i).setName(name);
+                dependencies.get(i).setShortname(shortname);
+                dependencies.get(i).setDescription(description);
+            }
+        }
+    }
+    public int foundDependency(String name, String shortname)
+    {
+        for (int i = 0; i < dependencies.size(); i++)
+        {
+            if((dependencies.get(i).getName().equals(name)&&dependencies.get(i).getShortname().equals(shortname)))
+            {
+                return  dependencies.get(i).get_ID();
+            }
+        }
+        return -1;
+    }
     public ArrayList<Dependency> getDependencies()
     {
         Collections.sort(dependencies);

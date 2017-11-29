@@ -10,6 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.example.inventorymaterial.R;
 import com.example.inventorymaterial.adapter.DependencyAdapter;
@@ -36,7 +38,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     }
 
     interface ListDependencyListener{
-        void addNewDependency();
+        void addNewDependency(Bundle bnd);
     }
 
     @Override
@@ -78,15 +80,17 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         View rootView = inflater.inflate(R.layout.fragment_list_dependency,container,false);
         //Como se encuentra en el fragment, usamos rootView
         FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
+        ListView listView = (ListView)rootView.findViewById(android.R.id.list);
         //Si el floatingActionButton se encontrara en el xml de la activity
         //FloatingActionButton fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              callback.addNewDependency();
+              callback.addNewDependency(null);
             }
         });
         presenter.loadDependency();
+
         return rootView;
     }
 
@@ -94,6 +98,14 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setListAdapter(dependencyAdapter);
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bnd = new Bundle();
+                bnd.putParcelable(Dependency.TAG, (Dependency)adapterView.getItemAtPosition(i));
+                callback.addNewDependency(bnd);
+            }
+        });
     }
 
     public void showDependency(List<Dependency> list)

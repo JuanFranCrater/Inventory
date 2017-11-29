@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
  */
 
 public final class CommonUtils {
+
     /**
      * Método que comprueba que la contraseña tenga los siguientes requisitos
      * Debe contener al menos un dígito 0-9
