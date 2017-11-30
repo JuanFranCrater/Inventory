@@ -1,5 +1,13 @@
 package com.example.inventorymaterial.ui.utils;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+
+import com.example.inventorymaterial.R;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +34,8 @@ public final class CommonUtils {
                 {6,}	          al menos 6 caracteres
      )
      */
+
+
     public static boolean isPasswordValid(String password)
     {
         Pattern pattern;

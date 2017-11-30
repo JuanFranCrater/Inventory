@@ -9,7 +9,7 @@ import com.example.inventorymaterial.ui.dependency.interactor.AddEditDependencyI
  */
 
 public class AddEditDependencyPresenterImpl  implements AddEditContrat.Presenter, AddEditInteractor.OnAddDependecyListener{
-    private final AddEditContrat.View view;
+    private AddEditContrat.View view;
     private AddEditDependencyInteractorImpl addEditInteractor;
     public AddEditDependencyPresenterImpl(AddEditContrat.View view)
     {
@@ -49,5 +49,17 @@ public class AddEditDependencyPresenterImpl  implements AddEditContrat.Presenter
     public void onSuccess() {
         view.showListDependency();
     }
+
+    @Override
+    public void delete(Object id) {
+
+    }
+/*
+    @Override
+    public void onDestroy() {
+        view=null;
+        addEditInteractor=null;
+    }
+    */
 
 }

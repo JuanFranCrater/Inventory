@@ -91,4 +91,15 @@ public class DependencyRepository {
         //Collections.sort(dependencies, new Dependency.DependencyOrderByShortName());
         return dependencies;
     }
+
+    public void deleteDependency(int id) {
+
+        for (int i = 0; i < dependencies.size(); i++)
+        {
+            if((dependencies.get(i).get_ID()==id))
+            {
+                dependencies.remove(i);
+            }
+        }
+    }
 }

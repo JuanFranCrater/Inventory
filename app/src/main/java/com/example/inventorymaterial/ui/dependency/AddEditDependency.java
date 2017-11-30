@@ -77,7 +77,10 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                presenter.validatedependency(tilname.getEditText().getText().toString(),tilshortname.getEditText().getText().toString(),tildescription.getEditText().getText().toString());
+                if(presenter!=null)
+                {
+                    presenter.validatedependency(tilname.getEditText().getText().toString(), tilshortname.getEditText().getText().toString(), tildescription.getEditText().getText().toString());
+                }
             }
         });
 
@@ -98,9 +101,6 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
         showMessage("Dependency saved");
         FragmentManager fragMa = getFragmentManager();
         fragMa.popBackStack();
-        //getActivity().finish();
-        //startActivity(getActivity().getIntent());
-
     }
 
     @Override
@@ -125,20 +125,20 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
     public void showDependencyExitsError() {
         showMessage(getResources().getString(R.string.errorDependencyDuplicate));
     }
-
+    //NO
     @Override
     public void setNameEmptyError() {
-    onError("NO name bitch");
+    onError("NO name");
     }
-
+    //NO
     @Override
     public void setShortNameEmptyError() {
-        onError("NO shortname bitch");
+        onError("NO shortname");
     }
-
+    //NO
     @Override
     public void setDescriptionEmptyError() {
-        onError("NO description bitch");
+        onError("NO description");
     }
 
 }

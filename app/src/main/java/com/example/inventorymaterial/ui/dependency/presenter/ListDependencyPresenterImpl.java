@@ -1,5 +1,7 @@
 package com.example.inventorymaterial.ui.dependency.presenter;
 
+import android.content.Context;
+
 import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyContrat;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyInteractor;
@@ -24,6 +26,11 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
         listDependencyInteractor.loadDependency();
     }
 
+    @Override
+    public void delete(Object dependency) {
+        listDependencyInteractor.deleteDependency((Dependency) dependency);
+    }
+
     /**
      * Este método es llamado por el interactor cuando los datos/listado de dependencias esté listo. Se avisa a la vista
      * @param list
@@ -32,4 +39,13 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
     public void onSuccess(List<Dependency> list) {
         view.showDependency(list);
     }
+
+/*
+    @Override
+    public void onDestroy() {
+        view=null;
+        listDependencyInteractor=null;
+    }
+    */
+
 }
