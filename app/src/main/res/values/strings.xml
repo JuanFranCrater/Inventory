@@ -57,6 +57,7 @@
     <string name="fragment_listdependency_delete">Eliminar Dependencia</string>
     <string name="btnOK">Aceptar</string>
     <string name="btnCancel">Cancelar</string>
+    <string name="successDeleteDependency">Dependency deleted</string>
 
 
 </resources>

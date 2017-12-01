@@ -12,10 +12,10 @@ public class DetailDependencyPresenterImpl implements BasePresenter{
 
     }
 
-   /* @Override
+    @Override
     public void onDestroy() {
 
     }
-    */
+
 
 }

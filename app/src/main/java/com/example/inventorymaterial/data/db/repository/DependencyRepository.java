@@ -7,6 +7,7 @@ import com.example.inventorymaterial.data.db.model.Sector;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * Created by
@@ -64,6 +65,7 @@ public class DependencyRepository {
 
     }
     public void editDependency(int id, String name, String shortname, String description) {
+
         for (int i = 0; i < dependencies.size(); i++)
         {
             if((dependencies.get(i).get_ID() == id))
@@ -92,13 +94,16 @@ public class DependencyRepository {
         return dependencies;
     }
 
-    public void deleteDependency(int id) {
-
-        for (int i = 0; i < dependencies.size(); i++)
+    public void deleteDependency(Dependency dependency) {
+        //para borrar DeleteDependency
+        Iterator<Dependency> iterator = dependencies.iterator();
+        Dependency dependencyite;
+        while(iterator.hasNext())
         {
-            if((dependencies.get(i).get_ID()==id))
+            dependencyite=iterator.next();
+            if(dependencyite.get_ID()==dependency.get_ID())
             {
-                dependencies.remove(i);
+                iterator.remove();
             }
         }
     }

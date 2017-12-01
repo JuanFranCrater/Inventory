@@ -10,6 +10,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,6 +25,7 @@ import com.example.inventorymaterial.adapter.DependencyAdapter;
 import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.ui.base.BasePresenter;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyContrat;
+import com.example.inventorymaterial.ui.dependency.presenter.ListDependencyPresenterImpl;
 import com.example.inventorymaterial.ui.utils.ConfirmationDialog;
 
 import java.util.List;
@@ -87,7 +90,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
                 Bundle bnd = new Bundle();
                 bnd.putString(ConfirmationDialog.MESSAGE, "¿Desea eliminar la dependencia?");
                 bnd.putString(ConfirmationDialog.TITLE, "Eliminar dependencia");
-                Dialog dialog = ConfirmationDialog.showConfirmDialog(bnd, getActivity(),dependencyAdapter.getItem(info.position),presenter,ConfirmationDialog.DELETE);
+                Dialog dialog = ConfirmationDialog.showConfirmDialog(bnd, getActivity(),(Dependency)getListView().getItemAtPosition(info.position),presenter,ConfirmationDialog.DELETE);
                 dialog.show();
                 break;
         }
@@ -122,18 +125,22 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         super.onDetach();
         callback=null;
     }
-/*
+
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         presenter.onDestroy();
         dependencyAdapter=null;
     }
-*/
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+            this.presenter= new ListDependencyPresenterImpl(this);
+
+        //Como el fragment mantiene el estado/y sólo elimina la vista)
+        //se debe reinicializar el presenter cuando se crea la vista
         View rootView = inflater.inflate(R.layout.fragment_list_dependency,container,false);
         //Como se encuentra en el fragment, usamos rootView
         FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
@@ -147,13 +154,14 @@ public class ListDependency extends ListFragment implements ListDependencyContra
             }
         });
         presenter.loadDependency();
-
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         setListAdapter(dependencyAdapter);
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -173,4 +181,19 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         dependencyAdapter.addAll(list);
     }
 
+    @Override
+    public void showDeleteDependency() {
+        showMessageList(getResources().getString(R.string.successDeleteDependency));
+    }
+
+    @Override
+    public void showMessageList(String message) {
+        Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("presenter",presenter);
+    }
 }

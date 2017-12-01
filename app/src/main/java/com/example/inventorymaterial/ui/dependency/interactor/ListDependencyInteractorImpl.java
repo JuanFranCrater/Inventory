@@ -25,8 +25,7 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor{
 
     @Override
     public void deleteDependency(Dependency dependency) {
-        DependencyRepository.getInstance().deleteDependency(dependency.get_ID());
-        listener.onSuccess(DependencyRepository.getInstance().getDependencies());
+        DependencyRepository.getInstance().deleteDependency(dependency);
     }
 
 }

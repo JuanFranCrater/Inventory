@@ -21,9 +21,9 @@ import com.example.inventorymaterial.ui.utils.AddEdit;
 public class DependecyActivity extends BaseActivity implements ListDependency.ListDependencyListener{
 
     private ListDependency listDependency;
-    private ListDependencyPresenterImpl listPresenter;
+    //private ListDependencyPresenterImpl listPresenter;
     private AddEditDependency addeditDependency;
-    private AddEditDependencyPresenterImpl addEditPresenter;
+    //private AddEditDependencyPresenterImpl addEditPresenter;
     private DetailDependency detailDependency;
 
 
@@ -42,11 +42,12 @@ public class DependecyActivity extends BaseActivity implements ListDependency.Li
             fraTra.commit();
 
         }
+        /*
         //2. Se crea el presentador, y se le pasa en el constructor la vista correspondiente/su fragment
         listPresenter = new ListDependencyPresenterImpl(listDependency);
-
+        */
         //3.Si necesitamos, se asigna el presentador a su fragment
-        listDependency.setPresenter(listPresenter);
+            //listDependency.setPresenter(listPresenter);
     }
 
     @Override
@@ -62,8 +63,9 @@ public class DependecyActivity extends BaseActivity implements ListDependency.Li
             fraTra.addToBackStack(null);
             fraTra.commit();
         }
-        addEditPresenter= new AddEditDependencyPresenterImpl(addeditDependency);
-        addeditDependency.setPresenter(addEditPresenter);
+        /*addEditPresenter= new AddEditDependencyPresenterImpl(addeditDependency);
+        */
+      //  addeditDependency.setPresenter(addEditPresenter);
 
     }
 

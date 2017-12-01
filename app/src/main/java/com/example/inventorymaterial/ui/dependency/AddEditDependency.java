@@ -2,6 +2,7 @@ package com.example.inventorymaterial.ui.dependency;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
@@ -17,6 +18,7 @@ import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.ui.base.BaseFragment;
 import com.example.inventorymaterial.ui.base.BasePresenter;
 import com.example.inventorymaterial.ui.dependency.contrat.AddEditContrat;
+import com.example.inventorymaterial.ui.dependency.presenter.AddEditDependencyPresenterImpl;
 import com.example.inventorymaterial.ui.utils.AddEdit;
 
 public class AddEditDependency extends BaseFragment implements AddEditContrat.View {
@@ -51,6 +53,7 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        setPresenter(new AddEditDependencyPresenterImpl(this));
         View rootView = inflater.inflate(R.layout.fragment_add_edit_dependency,container,false);
         FloatingActionButton fab = rootView.findViewById(R.id.fab);
         tilname = rootView.findViewById(R.id.tilName);
@@ -77,10 +80,7 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(presenter!=null)
-                {
                     presenter.validatedependency(tilname.getEditText().getText().toString(), tilshortname.getEditText().getText().toString(), tildescription.getEditText().getText().toString());
-                }
             }
         });
 
@@ -141,4 +141,15 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
         onError("NO description");
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("presenter",presenter);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 }

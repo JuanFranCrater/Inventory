@@ -54,12 +54,12 @@ public class AddEditDependencyPresenterImpl  implements AddEditContrat.Presenter
     public void delete(Object id) {
 
     }
-/*
+
     @Override
     public void onDestroy() {
         view=null;
         addEditInteractor=null;
     }
-    */
+
 
 }

@@ -29,6 +29,8 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
     @Override
     public void delete(Object dependency) {
         listDependencyInteractor.deleteDependency((Dependency) dependency);
+        loadDependency();
+        view.showDeleteDependency();
     }
 
     /**
@@ -40,12 +42,12 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
         view.showDependency(list);
     }
 
-/*
+
     @Override
     public void onDestroy() {
         view=null;
         listDependencyInteractor=null;
     }
-    */
+
 
 }
