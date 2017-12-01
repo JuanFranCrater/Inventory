@@ -14,6 +14,8 @@ import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,12 +115,10 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         super.onCreate(savedInstanceState);
         this.dependencyAdapter = new DependencyAdapter(getActivity());
         setRetainInstance(true);
-    }
-
-    public ListDependency() {
-
 
     }
+
+    public ListDependency() {}
 
     @Override
     public void onDetach() {
@@ -136,7 +136,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
+        setHasOptionsMenu(true);
             this.presenter= new ListDependencyPresenterImpl(this);
 
         //Como el fragment mantiene el estado/y sólo elimina la vista)
@@ -160,8 +160,6 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         setListAdapter(dependencyAdapter);
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -195,5 +193,23 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("presenter",presenter);
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_fragment_orderby, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.action_listdependency_orderById:
+
+                break;
+            case R.id.action_listdependency_orderByName:
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -22,7 +22,7 @@ public class ConfirmationDialog {
      public static String MESSAGE="message";
     public static  String TITLE="titulo";
 
-    public static Dialog showConfirmDialog(Bundle bnd, Context context, final Dependency dependency, final BasePresenter presenter, final int action)
+    public static Dialog showConfirmDialog(Bundle bnd, Context context, final Object object, final BasePresenter presenter, final int action)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(bnd.getString(ConfirmationDialog.MESSAGE))
@@ -33,7 +33,7 @@ public class ConfirmationDialog {
                         switch (action)
                         {
                             case DELETE:
-                                    presenter.delete(dependency);
+                                    presenter.delete(object);
                                 break;
                         }
                     }

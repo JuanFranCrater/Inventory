@@ -58,6 +58,8 @@
     <string name="btnOK">Aceptar</string>
     <string name="btnCancel">Cancelar</string>
     <string name="successDeleteDependency">Dependency deleted</string>
+    <string name="sort_by_id">Sort by ID</string>
+    <string name="sort_by_name">Sort by Name</string>
 
 
 </resources>
