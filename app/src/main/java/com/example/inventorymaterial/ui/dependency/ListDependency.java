@@ -136,12 +136,13 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+
             this.presenter= new ListDependencyPresenterImpl(this);
 
         //Como el fragment mantiene el estado/y sólo elimina la vista)
         //se debe reinicializar el presenter cuando se crea la vista
         View rootView = inflater.inflate(R.layout.fragment_list_dependency,container,false);
+        setHasOptionsMenu(true);
         //Como se encuentra en el fragment, usamos rootView
         FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
         ListView listView = (ListView)rootView.findViewById(android.R.id.list);
@@ -197,7 +198,6 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment_orderby, menu);
-        super.onCreateOptionsMenu(menu,inflater);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
