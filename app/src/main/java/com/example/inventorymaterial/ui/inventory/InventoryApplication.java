@@ -29,7 +29,7 @@ public class InventoryApplication extends Application {
     }
 
 
-    public static Context getContext() {
+    public static Context getTheContext() {
         return ;
     }
 }
