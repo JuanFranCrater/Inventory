@@ -13,9 +13,9 @@ import com.example.inventorymaterial.data.prefs.AppPreferencesHelper;
 public class InventoryApplication extends Application {
 
     private AppPreferencesHelper appPreferencesHelper;
-
+    private static InventoryApplication mContext;
     public InventoryApplication(){
-
+    mContext=this;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class InventoryApplication extends Application {
     }
 
 
-    public static Context getTheContext() {
-        return ;
+    public static Context getContext() {
+        return mContext;
     }
 }

@@ -11,6 +11,9 @@ import java.util.List;
 public interface ListDependencyInteractor {
     void loadDependency();
     void deleteDependency(Dependency dependency);
+
+    Dependency getDependencyAtPosition(int i);
+
     interface OnLoadFinishedListener
     {
         void onSuccess(List<Dependency> list);

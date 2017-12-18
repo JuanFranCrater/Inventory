@@ -170,8 +170,18 @@ public class ListDependency extends ListFragment implements ListDependencyContra
                 callback.addNewDependency(bnd);
             }
         });
+        //Activar el modo multichoice en la lista
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        getListView().setMultiChoiceModeListener(new DependencyMultiChoiceModeListener(presenter));
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                getListView().setItemChecked(position,!presenter.isPositionChecked(position));
+                return true;
+            }
+        });
         //Registramos el menú contextual
-        registerForContextMenu(getListView());
+        //registerForContextMenu(getListView());
     }
 
     public void showDependency(List<Dependency> list)

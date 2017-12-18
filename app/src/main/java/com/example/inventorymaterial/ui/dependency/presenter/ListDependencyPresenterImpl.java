@@ -1,12 +1,14 @@
 package com.example.inventorymaterial.ui.dependency.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyContrat;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyInteractor;
 import com.example.inventorymaterial.ui.dependency.interactor.ListDependencyInteractorImpl;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,6 +26,42 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
     @Override
     public void loadDependency() {
         listDependencyInteractor.loadDependency();
+    }
+
+    /**
+     * Metodos que gestionan la seleccion multiple
+     * @param position
+     */
+    HashMap<Integer, Boolean> selection= new HashMap<>();
+    @Override
+    public void setNewSelection(int position) {
+        selection.put(position,true);
+    }
+
+    @Override
+    public void removeSelection(int position) {
+        selection.remove(position);
+    }
+
+
+    @Override
+    public void deleteSelection() {
+        while (selection.size()>0)
+        {
+            Log.d("delete",String.valueOf(selection.size()));
+            selection.remove(selection.size()-1);
+        }
+        listDependencyInteractor.loadDependency();
+    }
+
+    @Override
+    public void clearSelection() {
+        selection.clear();
+    }
+
+    @Override
+    public boolean isPositionChecked(int position) {
+        return selection.get(position)==null?false:true;
     }
 
     @Override

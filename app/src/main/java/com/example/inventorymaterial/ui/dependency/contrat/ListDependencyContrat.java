@@ -19,5 +19,15 @@ public interface ListDependencyContrat {
     }
     interface Presenter extends BasePresenter, Serializable {
         void loadDependency();
+
+        void setNewSelection(int position);
+
+        void removeSelection(int position);
+
+        void deleteSelection();
+
+        void clearSelection();
+
+        boolean isPositionChecked(int position);
     }
 }
