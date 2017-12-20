@@ -16,10 +16,12 @@ public interface ListDependencyContrat {
       void showDependency(List<Dependency> list);
       void showDeleteDependency();
       void showMessageList(String message);
+
+        Dependency getDependency(Integer position);
     }
     interface Presenter extends BasePresenter, Serializable {
         void loadDependency();
-
+        void checkedActionMode();
         void setNewSelection(int position);
 
         void removeSelection(int position);

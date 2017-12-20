@@ -2,6 +2,7 @@ package com.example.inventorymaterial.ui.dependency.contrat;
 
 import com.example.inventorymaterial.ui.base.BasePresenter;
 import com.example.inventorymaterial.ui.base.BaseView;
+import com.example.inventorymaterial.ui.utils.AddEdit;
 
 import java.io.Serializable;
 
@@ -22,7 +23,7 @@ public interface AddEditContrat {
         void setDescriptionEmptyError();
     }
     interface Presenter extends BasePresenter, Serializable {
-        void validatedependency(String nombre, String shortname, String description);
+        void validatedependency(String nombre, String shortname, String description, AddEdit mode);
 
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.inventorymaterial.ui.dependency.DependecyActivity;
 import com.example.inventorymaterial.ui.login.LoginViewImpl;
 
 /*
@@ -26,7 +27,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void llamarLogin()
     {
-        Intent intent = new Intent(SplashActivity.this, LoginViewImpl.class);
+        Intent intent = new Intent(SplashActivity.this, DependecyActivity.class);
 
         startActivity(intent);
     }

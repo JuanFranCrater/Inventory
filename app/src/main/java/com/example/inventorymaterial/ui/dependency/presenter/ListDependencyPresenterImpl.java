@@ -8,8 +8,11 @@ import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyContrat
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyInteractor;
 import com.example.inventorymaterial.ui.dependency.interactor.ListDependencyInteractorImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by usuario on 23/11/17.
@@ -28,11 +31,17 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
         listDependencyInteractor.loadDependency();
     }
 
+    @Override
+    public void checkedActionMode() {
+
+    }
+
     /**
      * Metodos que gestionan la seleccion multiple
      * @param position
      */
     HashMap<Integer, Boolean> selection= new HashMap<>();
+
     @Override
     public void setNewSelection(int position) {
         selection.put(position,true);
@@ -46,12 +55,16 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
 
     @Override
     public void deleteSelection() {
-        while (selection.size()>0)
+
+        for(Integer position:selection.keySet())
         {
-            Log.d("delete",String.valueOf(selection.size()));
-            selection.remove(selection.size()-1);
+            listDependencyInteractor.deleteDependency(getDependency(position));
         }
-        listDependencyInteractor.loadDependency();
+
+    }
+
+    private Dependency getDependency(Integer position) {
+        return view.getDependency(position);
     }
 
     @Override

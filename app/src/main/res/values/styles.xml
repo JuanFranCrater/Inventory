@@ -6,7 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+         </style>
+
+    <style name="Widget.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="background">@color/background_action_mode</item>
+        <item name="android:background">@color/background_action_mode</item>
+        <item name="actionModeBackground">@color/background_action_mode</item>
+        <item name="android:actionModeBackground">@color/background_action_mode</item>
+
     </style>
+
     <style name="AppThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -15,6 +24,8 @@
     </style>
     <style name="LoginTheme" parent="AppTheme">
         <item name="android:textColor">@color/colorPrimaryLogin</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
     <style name="Widget" parent="@android:style/Widget"/>
     <style name="Widget.Button" parent="@android:style/Widget.Button"/>
@@ -35,5 +46,4 @@
         <item name="colorAccent">#acacac</item>
         <item name="android:textColorSecondary">#000000</item>
 </style>
-
 </resources>

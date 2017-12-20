@@ -77,13 +77,8 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
 
         tilshortname = rootView.findViewById(R.id.tilShorname);
         tildescription = rootView.findViewById(R.id.tilDescription);
-        fab.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                    presenter.validatedependency(tilname.getEditText().getText().toString(), tilshortname.getEditText().getText().toString(), tildescription.getEditText().getText().toString());
-            }
-        });
-
+        AddEdit mode = new AddEdit();
+        mode.setMode(AddEdit.ADD_MODE);
         if(getArguments()!=null)//es editar
         {
             tilname.setEnabled(false);
@@ -91,7 +86,17 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
             tilshortname.setEnabled(false);
             tilshortname.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getShortname());
             tildescription.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getDescription());
+
+            mode.setMode(AddEdit.EDIT_MODE);
         }
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                    presenter.validatedependency(tilname.getEditText().getText().toString(), tilshortname.getEditText().getText().toString(), tildescription.getEditText().getText().toString(),new AddEdit());
+            }
+        });
+
+
         return rootView;
     }
 

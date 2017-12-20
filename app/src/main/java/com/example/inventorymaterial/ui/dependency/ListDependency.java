@@ -201,6 +201,11 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     }
 
     @Override
+    public Dependency getDependency(Integer position) {
+        return dependencyAdapter.getItem(position);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("presenter",presenter);
