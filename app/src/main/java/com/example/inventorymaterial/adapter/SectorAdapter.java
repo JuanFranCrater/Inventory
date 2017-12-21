@@ -2,6 +2,7 @@ package com.example.inventorymaterial.adapter;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
  */
 
 public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorViewHolder>{
+
     private ArrayList<Sector> sectors;
 
     public ArrayList<Sector> getSectors() {
@@ -35,17 +37,22 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorView
     //En nuestro caso en el Repository
     private ArrayList<Sector> sectorsMod;
     private OnSwitchCheckedChangeListener onSwitchCheckedChangeListener;
-
-
-    public SectorAdapter(){
+    private OnItemClickListener listener;
+    public SectorAdapter(OnItemClickListener listener){
+        this.listener=listener;
     sectors= SectorRepository.getInstance().getSectors();
     sectorsMod= new ArrayList<>();
     }
 
+    public interface OnItemClickListener{
+        void onItemClick(Sector sector);
+    }
+
     //Constructor que se llamara cuando la SectorActivity se venga de un cambio de configuracion
     //y se haya salvado el estado dinámico
-    public SectorAdapter(ArrayList<Sector> sectorsMod)
+    public SectorAdapter(ArrayList<Sector> sectorsMod, OnItemClickListener listener)
     {
+        this.listener=listener;
         sectors=SectorRepository.getInstance().getSectors();
         this.sectorsMod=sectorsMod;
     }
@@ -58,6 +65,7 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorView
         //null porque ya hemos establecio el viewGroup para nuestro item_dependency
         //3. Se crea el objetos SectorViewHolder a partir de la vista
         SectorViewHolder _sectorViewHolder = new SectorViewHolder(viewHolder);
+
         return _sectorViewHolder;
     }
 
@@ -70,6 +78,7 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorView
         {
             holder.txvSectorDefault.setText(R.string.txvSectorDefault);
         }
+        holder.bind(sectors.get(position),listener);
     }
 
     /**
@@ -91,6 +100,15 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorView
             swEnabled= view.findViewById(R.id.swSector);
             txvName= view.findViewById(R.id.txvNameS);
             txvSectorDefault= view.findViewById(R.id.txvShortNameS);
+        }
+
+        public void bind(final Sector sector, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(sector);
+                }
+            });
         }
     }
 

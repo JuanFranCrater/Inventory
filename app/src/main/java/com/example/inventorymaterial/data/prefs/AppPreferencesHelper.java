@@ -1,6 +1,9 @@
 package com.example.inventorymaterial.data.prefs;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.example.inventorymaterial.ui.inventory.InventoryApplication;
 import com.example.inventorymaterial.ui.utils.AppConstants;
@@ -10,18 +13,33 @@ import com.example.inventorymaterial.ui.utils.AppConstants;
  */
 
 public class AppPreferencesHelper implements AccountPreferencesHelper,GeneralPreferencesHelper {
+    private static final String TAG = "AppPreferencesHelper";
     /**
      * 1) Se define todas las Key posibles del fichero preferences
      */
-
-
+    public interface AppPreferencesListerner
+    {
+        void onSharedPrerenceChange();
+    }
     //2. Objeto para editar las preferencias
     private final SharedPreferences preferences;
     private static AppPreferencesHelper instance;
+    private SharedPreferences.OnSharedPreferenceChangeListener listener;
+
+
 
     private AppPreferencesHelper() {
         //Si es el fichero por defecto de las preferencias
         this.preferences = (InventoryApplication.getContext()).getSharedPreferences(AppConstants.PREF_NAME,0);
+        listener= new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+
+                InventoryApplication.getContext();
+
+                Log.d(TAG, "onSharedPreferenceChanged: Se ha cambiado la key");
+            }
+        };
         //Si es un fichero con nombre diferente
     }
 
@@ -74,4 +92,5 @@ public class AppPreferencesHelper implements AccountPreferencesHelper,GeneralPre
     public void setCurrentUserRemember(boolean remember) {
         preferences.edit().putBoolean(PREF_KEY_CURRENT_USER_REMEMBER,remember).apply();
     }
+
 }

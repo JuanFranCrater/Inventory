@@ -1,6 +1,7 @@
 package com.example.inventorymaterial.ui.login;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ Esta activity es el login de la aplicacion donde el usuario se conectara(no hace
  */
 
 public class LoginViewImpl extends BaseActivity implements LoginView {
+
 
     private Button btnSingIn;
     private LoginPresenter loginPresenter;
