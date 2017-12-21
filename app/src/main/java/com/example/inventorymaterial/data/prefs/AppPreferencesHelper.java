@@ -30,7 +30,7 @@ public class AppPreferencesHelper implements AccountPreferencesHelper,GeneralPre
 
     private AppPreferencesHelper() {
         //Si es el fichero por defecto de las preferencias
-        this.preferences = (InventoryApplication.getContext()).getSharedPreferences(AppConstants.PREF_NAME,0);
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(InventoryApplication.getContext());
         listener= new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
