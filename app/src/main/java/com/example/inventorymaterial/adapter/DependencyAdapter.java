@@ -35,32 +35,8 @@ public class DependencyAdapter extends ArrayAdapter<Dependency> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         DependencyHolder dependencyHolder;
         View view=convertView;
+        return  convertView;
 
-        if (view == null) {
-
-        //1.Obtener el servicio del sistema LayoutInflater en el contexto
-        // /Opcion1: Esto no ('cause she doesnt use it)-> LayoutInflater inflater = LayoutInflater.from(getContext());
-        // Opcion2: no por que nos la jugamos -> LayoutInflater inflater = ((Activity)getContext()).getLayoutInflater();
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //2.Inflar la vista Crea en memoria el objeto View con todos los Widget del xml: item_dependency.xml
-        view = inflater.inflate(R.layout.item_dependency, null);//null porque ya hemos establecio el viewGroup para nuestro item_dependency
-        dependencyHolder  = new DependencyHolder();
-            //3. Inicializar las variables a los objetos ya creados de los widget del xml. !!WARNING VIEW.FINDVIEWID!!
-            dependencyHolder.icon = (MaterialLetterIcon) view.findViewById(R.id.icon);
-            dependencyHolder.txvName = (TextView) view.findViewById(R.id.txvName);
-            dependencyHolder.txvShortName = (TextView) view.findViewById(R.id.txvShortName);
-            Typeface typeface=Typeface.createFromAsset(view.getContext().getAssets(),"fonts/bungeefont.ttf");
-            dependencyHolder.txvName.setTypeface(typeface);
-            view.setTag(dependencyHolder);
-        }else {
-            dependencyHolder=(DependencyHolder)view.getTag();
-        }
-        //4. Mostrar los datos de la posicion del ArrayList mediante position
-        dependencyHolder.icon.setLetter(getItem(position).getShortname().substring(0, 1));
-        dependencyHolder.txvName.setText(getItem(position).getName());//getItem viene de la parametrizacion de la clase(extends)
-        dependencyHolder.txvShortName.setText(getItem(position).getShortname());
-
-        return view;
     }
     class DependencyHolder{
         MaterialLetterIcon icon;

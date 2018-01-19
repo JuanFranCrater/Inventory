@@ -32,8 +32,6 @@ public class DashboardActivity extends AppCompatActivity {
     private GridLayout gridDashboard;
     private ClickListenerDashboard listenerDashboard ;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,7 +127,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void showAppPreferences() {
         AppPreferencesHelper sharedPreferences=((InventoryApplication)getApplicationContext()).getAppPreferencesHelper();
-        sharedPreferences.setCurrentUserName("Lolita");
+        sharedPreferences.setCurrentUserName("Juan");
         String message= "Tu usuario de sesión es "+sharedPreferences.getCurrentUserName();
         Toast.makeText(this,message, Toast.LENGTH_LONG).show();
     }
