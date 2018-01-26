@@ -30,7 +30,7 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor, D
     @Override
     public void deleteDependency(Dependency dependency) {
         DependencyRepository.getInstance().deleteDependencyIterator(dependency);
-
+        this.loadDependency();
     }
 
     @Override
@@ -45,7 +45,6 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor, D
 
     @Override
     public void load(ArrayList<Dependency> dependencies) {
-
         listener.onSuccess(dependencies);
     }
 }

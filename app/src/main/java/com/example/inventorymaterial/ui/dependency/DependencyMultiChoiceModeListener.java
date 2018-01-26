@@ -62,7 +62,6 @@ class DependencyMultiChoiceModeListener implements AbsListView.MultiChoiceModeLi
         }
 
         actionMode.finish();
-        presenter.loadDependency();
         return true;
     }
 

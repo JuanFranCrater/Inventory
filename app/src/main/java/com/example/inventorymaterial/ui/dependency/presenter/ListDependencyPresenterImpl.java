@@ -97,7 +97,6 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
     @Override
     public void delete(Object dependency) {
         listDependencyInteractor.deleteDependency((Dependency) dependency);
-        loadDependency();
         view.showDeleteDependency();
     }
 

@@ -195,6 +195,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
 
     @Override
     public void showDeleteDependency() {
+        presenter.loadDependency();
         showMessageList(getResources().getString(R.string.successDeleteDependency));
     }
 

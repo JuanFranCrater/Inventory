@@ -75,15 +75,7 @@ public class DependencyRepository {
     }
 
     public void deleteDependencyIterator(Dependency d) {
-        Iterator<Dependency> iterator = dependencies.iterator();
-        Dependency dependency;
-        while (iterator.hasNext()) {
-            dependency = iterator.next();
-            if (dependency.getName().equals(d.getName())) {
-                iterator.remove();
-                break;
-            }
-        }
+        dao.delete(d);
     }
 
     public void addDependency(String name, String shortName, String description, String imageName, DependencyRepositoryCallback callback) {
