@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.ui.base.BasePresenter;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyContrat;
 import com.example.inventorymaterial.ui.dependency.presenter.ListDependencyPresenterImpl;
+import com.example.inventorymaterial.ui.utils.CommonUtils;
 import com.example.inventorymaterial.ui.utils.ConfirmationDialog;
 
 import java.util.List;
@@ -43,7 +45,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     private ListDependencyListener callback;
     private ListDependencyContrat.Presenter presenter;
     private DependencyAdapter dependencyAdapter;
-
+    ProgressDialog progressDialog;
     @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (ListDependencyContrat.Presenter) presenter;
@@ -156,7 +158,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
               callback.addNewDependency(null);
             }
         });
-        presenter.loadDependency();
+
         return rootView;
     }
 
@@ -182,8 +184,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
                 return true;
             }
         });
-        //Registramos el menú contextual
-        //registerForContextMenu(getListView());
+        presenter.loadDependency();
     }
 
     public void showDependency(List<Dependency> list)
@@ -202,9 +203,21 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public void showProgressBar() {
+        progressDialog= CommonUtils.showProgressDialog(getActivity());
+        progressDialog.show();
+    }
+
     @Override
     public Dependency getDependency(Integer position) {
         return dependencyAdapter.getItem(position);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressDialog.dismiss();
     }
 
     @Override

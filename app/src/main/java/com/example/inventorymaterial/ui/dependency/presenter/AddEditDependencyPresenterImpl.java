@@ -15,12 +15,12 @@ public class AddEditDependencyPresenterImpl  implements AddEditContrat.Presenter
     public AddEditDependencyPresenterImpl(AddEditContrat.View view)
     {
         this.view =view;
-        addEditInteractor = new AddEditDependencyInteractorImpl();
+        addEditInteractor = new AddEditDependencyInteractorImpl(this);
     }
 
     @Override
     public void validatedependency(String nombre, String shortname, String description, AddEdit mode) {
-        addEditInteractor.validateDependency(nombre,shortname,description,this,mode);
+        addEditInteractor.validateDependency(nombre,shortname,description,mode);
     }
 
     @Override

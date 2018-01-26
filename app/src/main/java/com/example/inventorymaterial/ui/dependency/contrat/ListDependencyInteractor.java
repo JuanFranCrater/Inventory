@@ -12,7 +12,7 @@ public interface ListDependencyInteractor {
     void loadDependency();
     void deleteDependency(Dependency dependency);
 
-    Dependency getDependencyAtPosition(int i);
+    void getDependencyAtPosition(int i);
 
     interface OnLoadFinishedListener
     {

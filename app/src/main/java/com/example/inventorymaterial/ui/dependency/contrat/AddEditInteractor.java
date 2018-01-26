@@ -7,6 +7,8 @@ import com.example.inventorymaterial.ui.utils.AddEdit;
  */
 
 public interface AddEditInteractor {
+    void validateDependency(String name, String shortname, String description, AddEdit mode);
+
     interface OnAddDependecyListener {
         void onNameEmptyError();
 
@@ -18,5 +20,4 @@ public interface AddEditInteractor {
 
         void onSuccess();
     }
-    void validateDependency(String nombre, String shortname, String description, AddEditInteractor.OnAddDependecyListener listener, AddEdit mode);
 }

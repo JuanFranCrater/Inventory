@@ -14,6 +14,8 @@ import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.data.db.repository.DependencyRepository;
 import com.github.ivbaranov.mli.MaterialLetterIcon;
 
+import java.util.ArrayList;
+
 /**
  * Created by usuario on 26/10/17.
  * //Tampoco usamos esta, porque patata
@@ -21,7 +23,7 @@ import com.github.ivbaranov.mli.MaterialLetterIcon;
 
 public class DependencyAdapterB extends ArrayAdapter<Dependency> {
     public DependencyAdapterB(@NonNull Context context) {
-        super(context, R.layout.item_dependency, DependencyRepository.getInstance().getDependencies());
+        super(context, R.layout.item_dependency,new ArrayList<Dependency>());
     }
 
     @NonNull
@@ -47,9 +49,9 @@ public class DependencyAdapterB extends ArrayAdapter<Dependency> {
         txvName = (TextView) view.findViewById(R.id.txvName);
         txvShortName = (TextView) view.findViewById(R.id.txvShortName);
         //4. Mostrar los datos de la posicion del ArrayList mediante position
-        icon.setLetter(getItem(position).getShortname().substring(0, 1));
+        icon.setLetter(getItem(position).getSortName().substring(0, 1));
         txvName.setText(getItem(position).getName());//getItem viene de la parametrizacion de la clase(extends)
-        txvShortName.setText(getItem(position).getShortname());
+        txvShortName.setText(getItem(position).getSortName());
 
         return view;
     }

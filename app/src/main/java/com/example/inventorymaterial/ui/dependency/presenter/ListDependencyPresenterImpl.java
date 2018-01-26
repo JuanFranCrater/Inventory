@@ -1,6 +1,7 @@
 package com.example.inventorymaterial.ui.dependency.presenter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.inventorymaterial.data.db.model.Dependency;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by usuario on 23/11/17.
@@ -28,7 +30,22 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
 
     @Override
     public void loadDependency() {
-        listDependencyInteractor.loadDependency();
+        view.showProgressBar();
+        try {
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    listDependencyInteractor.loadDependency();
+                    return null;
+                }
+            }.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
@@ -91,6 +108,7 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
     @Override
     public void onSuccess(List<Dependency> list) {
         view.showDependency(list);
+        view.hideProgressBar();
     }
 
 

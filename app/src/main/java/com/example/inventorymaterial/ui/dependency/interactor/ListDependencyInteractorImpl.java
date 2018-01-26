@@ -1,17 +1,21 @@
 package com.example.inventorymaterial.ui.dependency.interactor;
 
+import android.os.AsyncTask;
+import android.os.Debug;
+import android.util.Log;
+
 import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.data.db.repository.DependencyRepository;
+import com.example.inventorymaterial.data.db.repository.DependencyRepositoryCallback;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyInteractor;
-import com.example.inventorymaterial.ui.login.LoginInteractor;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by usuario on 23/11/17.
  */
 
-public class ListDependencyInteractorImpl implements ListDependencyInteractor{
+public class ListDependencyInteractorImpl implements ListDependencyInteractor, DependencyRepositoryCallback {
     private ListDependencyInteractor.OnLoadFinishedListener listener;
 
     public ListDependencyInteractorImpl(ListDependencyInteractor.OnLoadFinishedListener listener) {
@@ -20,18 +24,28 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor{
 
     @Override
     public void loadDependency() {
-        listener.onSuccess(DependencyRepository.getInstance().getDependencies());
+        DependencyRepository.getInstance().getDependencies(this);
     }
 
     @Override
     public void deleteDependency(Dependency dependency) {
-        DependencyRepository.getInstance().deleteDependency(dependency);
+        DependencyRepository.getInstance().deleteDependencyIterator(dependency);
 
     }
 
     @Override
-    public Dependency getDependencyAtPosition(int i) {
-        return DependencyRepository.getInstance().getDependencies().get(i);
+    public void getDependencyAtPosition(int i) {
+         DependencyRepository.getInstance().getDependencies(this);
     }
 
+    @Override
+    public void onSucces() {
+
+    }
+
+    @Override
+    public void load(ArrayList<Dependency> dependencies) {
+
+        listener.onSuccess(dependencies);
+    }
 }

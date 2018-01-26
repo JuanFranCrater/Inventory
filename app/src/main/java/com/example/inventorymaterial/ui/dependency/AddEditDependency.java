@@ -84,7 +84,7 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
             tilname.setEnabled(false);
             tilname.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getName());
             tilshortname.setEnabled(false);
-            tilshortname.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getShortname());
+            tilshortname.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getSortName());
             tildescription.getEditText().setText(((Dependency)getArguments().getParcelable("Dependency")).getDescription());
 
             mode.setMode(AddEdit.EDIT_MODE);

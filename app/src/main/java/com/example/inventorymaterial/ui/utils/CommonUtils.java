@@ -2,6 +2,7 @@ package com.example.inventorymaterial.ui.utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -36,6 +37,14 @@ public final class CommonUtils {
      */
 
 
+    public static ProgressDialog showProgressDialog(Context context) {
+        final ProgressDialog progreso = new ProgressDialog(context);
+        progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progreso.setMessage("Obteniendo datos");
+        progreso.setCancelable(false);
+        return progreso;
+
+    }
     public static boolean isPasswordValid(String password)
     {
         Pattern pattern;

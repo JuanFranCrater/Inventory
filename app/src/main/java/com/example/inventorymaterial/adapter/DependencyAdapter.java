@@ -21,27 +21,51 @@ import java.util.ArrayList;
 
 public class DependencyAdapter extends ArrayAdapter<Dependency> {
 
-    /** =)=/(=)·Q
-     * Se crea una copia del ArrayList que se tiene en DependencyRepository
-     * para tener una copia local en el Adapter que se pueda modificar sin cambiar los datos originales
-     * @param context
-     */
     public DependencyAdapter(@NonNull Context context) {
-        super(context, R.layout.item_dependency, new ArrayList<Dependency>());
+        //super(context, R.layout.item_dependency, new ArrayList<>(DependencyRepository.getInstance().getDependencies())); // para mostrar los datos de innitializate
+        //sort(new Dependency.DependencyOrderByShortName());
+        //dependencies = new ArrayList<>(DependencyRepository.getInstance().getDependencies());// Para tener un array list distinto del que sea ha hecho sort
+        super(context,R.layout.item_dependency,new ArrayList<Dependency>());// para mostrar la lista vacia al principio
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         DependencyHolder dependencyHolder;
-        View view=convertView;
-        return  convertView;
+        View view = convertView;
 
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+            view = inflater.inflate(R.layout.item_dependency, null);
+            dependencyHolder = new DependencyHolder();
+
+
+            dependencyHolder.icon = (MaterialLetterIcon) view.findViewById(R.id.icon);
+            dependencyHolder.txvName = (TextView) view.findViewById(R.id.txvName);
+            dependencyHolder.txvSortName = (TextView) view.findViewById(R.id.txvShortName);
+
+            view.setTag(dependencyHolder);
+        } else {
+            dependencyHolder = (DependencyHolder) view.getTag();
+        }
+
+
+        dependencyHolder.icon.setLetter(getItem(position).getSortName().substring(0, 1));
+        dependencyHolder.txvName.setText(getItem(position).getName());
+        dependencyHolder.txvSortName.setText(getItem(position).getSortName());
+        return view;
     }
-    class DependencyHolder{
+
+    public DependencyAdapter orderByShortName(){
+        sort(new Dependency.DependencyOrderByShortName());
+        return this;
+    }
+
+    class DependencyHolder {
         MaterialLetterIcon icon;
         TextView txvName;
-        TextView txvShortName;
-
+        TextView txvSortName;
     }
 }

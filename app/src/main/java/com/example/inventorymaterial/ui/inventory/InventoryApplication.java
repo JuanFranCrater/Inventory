@@ -25,7 +25,7 @@ public class InventoryApplication extends Application {
     public void onCreate() {
         super.onCreate();
         appPreferencesHelper= AppPreferencesHelper.getInstance();
-        InventoryOpenHelper.getInstance().openDatabase();
+        InventoryOpenHelper.getInstance().openDateBase();
     }
 
     public AppPreferencesHelper getAppPreferencesHelper()
