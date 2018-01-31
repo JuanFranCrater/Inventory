@@ -18,7 +18,6 @@ public class DependencyDao {
     public ArrayList<Dependency> loadAll()
     {
         final ArrayList<Dependency> dependencies=new ArrayList<>();
-        final boolean[] wait = {true};
         final SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDateBase();
                 Cursor cursor = sqLiteDatabase.query(InventoryContract.DependencyEntry.TABLE_NAME,
                         InventoryContract.DependencyEntry.ALL_COLUMN,

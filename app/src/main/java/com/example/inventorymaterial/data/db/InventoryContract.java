@@ -166,11 +166,13 @@ public final class InventoryContract {
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_SHORTNAME = "shortname";
         public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_DEPENDENCYID = "idDependency";
         public static final String[] ALL_COLUMN = new String[] {
                 BaseColumns._ID,
                 COLUMN_NAME,
                 COLUMN_SHORTNAME,
-                COLUMN_DESCRIPTION
+                COLUMN_DESCRIPTION,
+                COLUMN_DEPENDENCYID
         };
 
         /**
@@ -181,14 +183,16 @@ public final class InventoryContract {
                         "%s TEXT NOT NULL," +
                         "%s TEXT NOT NULL," +
                         "%s TEXT NOT NULL," +
+                        "%s INTEGER NULL" +
                         "FOREIGN KEY (%s) REFERENCES %s (%s) on update cascade on delete restrict )",
                 TABLE_NAME,
                 BaseColumns._ID,
                 COLUMN_NAME,
                 COLUMN_SHORTNAME,
                 COLUMN_DESCRIPTION,
-                BaseColumns._ID,
-                DependencyEntry.TABLE_NAME.toString(),
+                COLUMN_DEPENDENCYID,
+                COLUMN_DEPENDENCYID,
+                DependencyEntry.TABLE_NAME,
                 BaseColumns._ID
         );
 
@@ -200,18 +204,21 @@ public final class InventoryContract {
         /**
          * INSERT
          */
-        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s,%s,%s) VALUES ('%s','%s','%s'),",
+        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s,%s,%s,%s) VALUES ('%s','%s','%s','%s'),",
                 TABLE_NAME,
                 COLUMN_NAME,
                 COLUMN_SHORTNAME,
                 COLUMN_DESCRIPTION,
+                COLUMN_DEPENDENCYID,
                 "Armario A",
                 "ArmA",
-                "Armario puerta madera"
-        )+String.format(" ('%s','%s','%s')",
+                "Armario puerta madera",
+                "1"
+        )+String.format(" ('%s','%s','%s','%s')",
                 "Armario B",
                 "ArmB",
-                "Armario puerta cristal"
+                "Armario puerta cristal",
+                "1"
         );
 
     }
