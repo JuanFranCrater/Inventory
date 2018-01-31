@@ -53,6 +53,12 @@ public class InventoryOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
             sqLiteDatabase.beginTransaction();
+            sqLiteDatabase.execSQL(InventoryContract.TipoEntry.SQL_CREATE_ENTRIES);
+            sqLiteDatabase.execSQL(InventoryContract.TipoEntry.SQL_INSERT_ENTRIES);
+            sqLiteDatabase.execSQL(InventoryContract.CategoryEntry.SQL_CREATE_ENTRIES);
+            sqLiteDatabase.execSQL(InventoryContract.CategoryEntry.SQL_INSERT_ENTRIES);
+            sqLiteDatabase.execSQL(InventoryContract.ProductEntry.SQL_CREATE_ENTRIES);
+            sqLiteDatabase.execSQL(InventoryContract.ProductEntry.SQL_INSERT_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.DependencyEntry.SQL_CREATE_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.DependencyEntry.SQL_INSERT_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.SectorEntry.SQL_CREATE_ENTRIES);
