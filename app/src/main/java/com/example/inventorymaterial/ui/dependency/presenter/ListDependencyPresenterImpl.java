@@ -31,21 +31,12 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
     @Override
     public void loadDependency() {
         view.showProgressBar();
-        try {
-            new AsyncTask() {
-                @Override
-                protected Object doInBackground(Object[] objects) {
-                    listDependencyInteractor.loadDependency();
-                    return null;
-                }
-            }.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        listDependencyInteractor.loadDependency();
+    }
 
-
+    @Override
+    public void showDialog() {
+        view.showProgressBar();
     }
 
     @Override
@@ -106,8 +97,8 @@ public class ListDependencyPresenterImpl implements ListDependencyContrat.Presen
      */
     @Override
     public void onSuccess(List<Dependency> list) {
-        view.showDependency(list);
         view.hideProgressBar();
+        view.showDependency(list);
     }
 
 

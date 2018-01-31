@@ -16,6 +16,7 @@ public interface ListDependencyInteractor {
 
     interface OnLoadFinishedListener
     {
+        void showDialog();
         void onSuccess(List<Dependency> list);
     }
 }

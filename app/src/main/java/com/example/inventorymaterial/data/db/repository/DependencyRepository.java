@@ -6,7 +6,6 @@ import com.example.inventorymaterial.data.db.model.Dependency;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 /**
  * Created by
@@ -58,9 +57,9 @@ public class DependencyRepository {
         return -1;
     }
 
-    public void getDependencies(DependencyRepositoryCallback callback) {
+    public ArrayList<Dependency> getDependencies() {
 
-        callback.load(dao.loadAll());
+        return dao.loadAll();
 
     }
 

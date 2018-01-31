@@ -24,7 +24,25 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor, D
 
     @Override
     public void loadDependency() {
-        DependencyRepository.getInstance().getDependencies(this);
+
+        new AsyncTask<Void, Void, ArrayList<Dependency>>() {
+
+            @Override
+            protected void onPostExecute(ArrayList<Dependency> dependencies) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                listener.onSuccess(dependencies);
+            }
+
+            @Override
+            protected ArrayList<Dependency> doInBackground(Void... voids) {
+                return DependencyRepository.getInstance().getDependencies();
+            }
+        }.execute();
+
     }
 
     @Override
@@ -35,7 +53,7 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor, D
 
     @Override
     public void getDependencyAtPosition(int i) {
-         DependencyRepository.getInstance().getDependencies(this);
+
     }
 
     @Override

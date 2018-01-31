@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -46,6 +47,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     private ListDependencyContrat.Presenter presenter;
     private DependencyAdapter dependencyAdapter;
     ProgressDialog progressDialog;
+
     @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter = (ListDependencyContrat.Presenter) presenter;
@@ -102,8 +104,6 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         return super.onContextItemSelected(item);
     }
 
-
-
     public static Fragment newInstance(Bundle arguments) {
         ListDependency listDependency = new ListDependency();
         if(arguments!=null)
@@ -118,6 +118,10 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         super.onCreate(savedInstanceState);
         this.dependencyAdapter = new DependencyAdapter(getActivity());
         setRetainInstance(true);
+        progressDialog= new ProgressDialog(getActivity());
+        progressDialog.setMessage("Cargando");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
 
     }
 
@@ -140,8 +144,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-            this.presenter= new ListDependencyPresenterImpl(this);
-
+        this.presenter= new ListDependencyPresenterImpl(this);
         //Como el fragment mantiene el estado/y sólo elimina la vista)
         //se debe reinicializar el presenter cuando se crea la vista
         View rootView = inflater.inflate(R.layout.fragment_list_dependency,container,false);
@@ -184,7 +187,9 @@ public class ListDependency extends ListFragment implements ListDependencyContra
                 return true;
             }
         });
+
         presenter.loadDependency();
+
     }
 
     public void showDependency(List<Dependency> list)
@@ -207,7 +212,6 @@ public class ListDependency extends ListFragment implements ListDependencyContra
 
     @Override
     public void showProgressBar() {
-        progressDialog= CommonUtils.showProgressDialog(getActivity());
         progressDialog.show();
     }
 
