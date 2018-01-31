@@ -11,10 +11,6 @@ import com.example.inventorymaterial.data.db.model.Sector;
 
 import java.util.ArrayList;
 
-/**
- * Created by usuario on 25/01/18.
- */
-
 public class SectorDao {
 
     public ArrayList<Sector> loadAll () {
@@ -43,7 +39,7 @@ public class SectorDao {
         SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDateBase();
 
         long filasAfectadas = sqLiteDatabase.insert(InventoryContract.SectorEntry.TABLE_NAME,
-                null, genContentValues(s));
+                null, getContentValues(s));
 
         sqLiteDatabase.close();
         return filasAfectadas;
@@ -53,7 +49,7 @@ public class SectorDao {
         SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDateBase();
 
         long filasAfectadas = sqLiteDatabase.update(InventoryContract.SectorEntry.TABLE_NAME,
-                genContentValues(s), BaseColumns._ID + "=" + s.getName(), null);
+                getContentValues(s), BaseColumns._ID + "=" + s.getName(), null);
 
         sqLiteDatabase.close();
         return filasAfectadas;
@@ -69,7 +65,7 @@ public class SectorDao {
         return filasAfectadas;
     }
 
-    private ContentValues genContentValues(Sector s) {
+    private ContentValues getContentValues(Sector s) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(InventoryContract.SectorEntry.COLUMN_DEPENDENCYID, s.getDependencyId());
         contentValues.put(InventoryContract.SectorEntry.COLUMN_NAME, s.getName());
@@ -77,5 +73,15 @@ public class SectorDao {
         contentValues.put(InventoryContract.SectorEntry.COLUMN_DESCRIPTION, s.getDescription());
 
         return contentValues;
+    }
+
+    public void add(Sector sector) {
+        SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDateBase();
+
+        ContentValues contentValues=getContentValues(sector);
+        long solucion= sqLiteDatabase.insert(InventoryContract.SectorEntry.TABLE_NAME,null, contentValues);
+        InventoryOpenHelper.getInstance().closeDateBase();
+
+        sqLiteDatabase.close();
     }
 }

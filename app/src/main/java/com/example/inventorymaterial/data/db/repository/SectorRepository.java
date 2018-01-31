@@ -1,6 +1,7 @@
 package com.example.inventorymaterial.data.db.repository;
 
 
+import com.example.inventorymaterial.data.db.dao.SectorDao;
 import com.example.inventorymaterial.data.db.model.Sector;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class SectorRepository {
     //Declaracion
     private ArrayList<Sector> sectors;
     private static SectorRepository sectorRepository;
-
+    private SectorDao dao;
 
     //Inicializacion
     //Inicializar todos los atributos de ámbito statico o de clase
@@ -24,26 +25,7 @@ public class SectorRepository {
     //El metodo ha de ser privado para garantizar que sólo hay una instancia de Repository
     private SectorRepository() {
         this.sectors = new ArrayList<>();
-        initialize();
-    }
-
-    private void initialize() {
-        addSector(new Sector(1,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(2,"Armario B","ArmB","Armario de libros y el Papel",2,true,true));
-        addSector(new Sector(3,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(4,"Armario B","ArmB","Armario de libros y el Papel",2,true,true));
-        addSector(new Sector(5,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(6,"Armario B","ArmB","Armario de libros y el Papel",2,true,true));
-        addSector(new Sector(7,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(8,"Armario B","ArmB","Armario de libros y el Papel",2,true,true));
-        addSector(new Sector(9,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(10,"Armario B","ArmB","Armario de libros y el Papel",2,true,true));
-        addSector(new Sector(11,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(12,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(13,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(14,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-        addSector(new Sector(15,"Armario A","ArmA","Armario de libros y el Agua de Sebastian",2,true,true));
-
+        dao = new SectorDao();
     }
 
     public static SectorRepository getInstance() {
@@ -52,18 +34,28 @@ public class SectorRepository {
         return sectorRepository;
     }
 
+    public int getSectorBy(String name, String shortname){
+        for (int i = 0;i<sectors.size();i++){
+            if (sectors.get(i).getName().equals(name) && sectors.get(i).getShortname().equals(shortname)){
+                return sectors.get(i).get_ID();
+            }
+        }
+        return -1;
+    }
 
-    /**
-     * Método que añade una dependencia
-     *
-     * @param sector
-     */
+    public void editSectorById(int id,String name, String shortname, String description){
+        dao.update(new Sector(id,name,shortname,description,1,true,false));
+    }
     public void addSector(Sector sector) {
-        sectors.add(sector);
+        dao.add(sector);
+    }
 
+    public void deleteSector(Sector sector) {
+        dao.delete(sector);
     }
 
     public ArrayList<Sector> getSectors() {
+        sectors = dao.loadAll();
         return sectors;
     }
 }
