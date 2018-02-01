@@ -1,52 +1,40 @@
 package com.example.inventorymaterial.data.db.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Product {
+public class Product implements Parcelable {
 
+    public static String TAG="Product";
     private int id;
-    private String name;
     private String serial;
-    private String seller;
-    private String model;
-    private Categoria categorie;
-    private Tipo type;
+    private String modelcode;
+    private String shortname;
     private String description;
-    private float price;
-    private Date buyDate;
+    private int categorieID;
+    private int subcategorieID;
+    private int typeID;
+    private int sectorID;
+    private int status;
+    private int quantity;
+    private double value;
+    private String vendor;
+    private String bitmap;
+    private String imageBase64;
+    private String imageName;
     private String url;
+    private String buyDate;
     private String notes;
 
-    public Product(int id, String name, String serial, String seller, String model, Categoria categorie, Tipo type, String description, float price, Date buyDate, String url, String notes) {
-        this.id = id;
-        this.name = name;
-        this.serial = serial;
-        this.seller = seller;
-        this.model = model;
-        this.categorie = categorie;
-        this.type = type;
-        this.description = description;
-        this.price = price;
-        this.buyDate = buyDate;
-        this.url = url;
-        this.notes = notes;
-    }
-
-    public int getid() {
+    public int getId() {
         return id;
     }
 
-    public void set_id(int id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSerial() {
@@ -57,36 +45,20 @@ public class Product {
         this.serial = serial;
     }
 
-    public String getSeller() {
-        return seller;
+    public String getModelcode() {
+        return modelcode;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
+    public void setModelcode(String modelcode) {
+        this.modelcode = modelcode;
     }
 
-    public String getModel() {
-        return model;
+    public String getShortname() {
+        return shortname;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public Categoria getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categoria categorie) {
-        this.categorie = categorie;
-    }
-
-    public Tipo getType() {
-        return type;
-    }
-
-    public void setType(Tipo type) {
-        this.type = type;
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
     }
 
     public String getDescription() {
@@ -97,20 +69,92 @@ public class Product {
         this.description = description;
     }
 
-    public float getPrice() {
-        return price;
+    public int getCategorieID() {
+        return categorieID;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setCategorieID(int categorieID) {
+        this.categorieID = categorieID;
     }
 
-    public Date getBuyDate() {
-        return buyDate;
+    public int getSubcategorieID() {
+        return subcategorieID;
     }
 
-    public void setBuyDate(Date buyDate) {
-        this.buyDate = buyDate;
+    public void setSubcategorieID(int subcategorieID) {
+        this.subcategorieID = subcategorieID;
+    }
+
+    public int getTypeID() {
+        return typeID;
+    }
+
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
+    }
+
+    public int getSectorID() {
+        return sectorID;
+    }
+
+    public void setSectorID(int sectorID) {
+        this.sectorID = sectorID;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+
+    public String getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(String bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    public String getImageBase64() {
+        return imageBase64;
+    }
+
+    public void setImageBase64(String imageBase64) {
+        this.imageBase64 = imageBase64;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public String getUrl() {
@@ -121,6 +165,14 @@ public class Product {
         this.url = url;
     }
 
+    public String getBuyDate() {
+        return buyDate;
+    }
+
+    public void setBuyDate(String buyDate) {
+        this.buyDate = buyDate;
+    }
+
     public String getNotes() {
         return notes;
     }
@@ -129,5 +181,87 @@ public class Product {
         this.notes = notes;
     }
 
+    public Product(int id, String serial, String modelcode, String shortname, String description, int categorieID, int subcategorieID, int typeID, int sectorID, int status, int quantity, double value, String vendor, String bitmap, String imageBase64, String imageName, String url, String buyDate, String notes) {
+        this.id = id;
+        this.serial = serial;
+        this.modelcode = modelcode;
+        this.shortname = shortname;
+        this.description = description;
+        this.categorieID = categorieID;
+        this.subcategorieID = subcategorieID;
+        this.typeID = typeID;
+        this.sectorID = sectorID;
+        this.status = status;
+        this.quantity = quantity;
+        this.value = value;
+        this.vendor = vendor;
+        this.bitmap = bitmap;
+        this.imageBase64 = imageBase64;
+        this.imageName = imageName;
+        this.url = url;
+        this.buyDate = buyDate;
+        this.notes = notes;
+    }
 
+    protected Product(Parcel in) {
+        id = in.readInt();
+        serial = in.readString();
+        modelcode = in.readString();
+        shortname = in.readString();
+        description = in.readString();
+        categorieID = in.readInt();
+        subcategorieID = in.readInt();
+        typeID = in.readInt();
+        sectorID = in.readInt();
+        status = in.readInt();
+        quantity = in.readInt();
+        value = in.readDouble();
+        vendor = in.readString();
+        bitmap = in.readString();
+        imageBase64 = in.readString();
+        imageName = in.readString();
+        url = in.readString();
+        buyDate = in.readString();
+        notes = in.readString();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(serial);
+        parcel.writeString(modelcode);
+        parcel.writeString(shortname);
+        parcel.writeString(description);
+        parcel.writeInt(categorieID);
+        parcel.writeInt(subcategorieID);
+        parcel.writeInt(typeID);
+        parcel.writeInt(sectorID);
+        parcel.writeInt(status);
+        parcel.writeInt(quantity);
+        parcel.writeDouble(value);
+        parcel.writeString(vendor);
+        parcel.writeString(bitmap);
+        parcel.writeString(imageBase64);
+        parcel.writeString(imageName);
+        parcel.writeString(url);
+        parcel.writeString(buyDate);
+        parcel.writeString(notes);
+    }
 }

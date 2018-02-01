@@ -17,13 +17,13 @@
             android:name=".ui.login.LoginViewImpl"
             android:theme="@style/LoginTheme" />
         <activity android:name=".ui.inventory.InventoryActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".ui.product.ProductActivity" />
-        <activity android:name=".ui.dependency.DependecyActivity" > <intent-filter>
+        <activity android:name=".DashboardActivity" ><intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter></activity>
+        <activity android:name=".ui.product.ProductActivity" > </activity>
+        <activity android:name=".ui.dependency.DependecyActivity" ></activity>
         <activity android:name=".ui.sector.SectorActivity" />
         <activity android:name=".ui.prefs.GeneralSettingActivity" />
         <activity android:name=".ui.prefs.AccountSettingActivity" />

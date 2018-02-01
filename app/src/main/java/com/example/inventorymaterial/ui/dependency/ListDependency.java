@@ -36,9 +36,6 @@ import com.example.inventorymaterial.ui.utils.ConfirmationDialog;
 
 import java.util.List;
 
-/**
- * Created by usuario on 23/11/17.
- */
 
 public class ListDependency extends ListFragment implements ListDependencyContrat.View {
 

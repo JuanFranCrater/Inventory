@@ -11,10 +11,6 @@ import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyInterac
 
 import java.util.ArrayList;
 
-/**
- * Created by usuario on 23/11/17.
- */
-
 public class ListDependencyInteractorImpl implements ListDependencyInteractor, DependencyRepositoryCallback {
     private ListDependencyInteractor.OnLoadFinishedListener listener;
 

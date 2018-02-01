@@ -2,7 +2,10 @@ package com.example.inventorymaterial.data.db;
 
 import android.provider.BaseColumns;
 
+import com.example.inventorymaterial.data.db.model.Product;
+
 import java.net.PortUnreachableException;
+import java.util.HashMap;
 
 /**
  * Created by usuario on 19/01/18.
@@ -15,57 +18,162 @@ public final class InventoryContract {
 
     }
 
-    public static final int DATABASE_VERSION=5;
+    public static final int DATABASE_VERSION=13;
     public static final String DATABASE_NAME="Inventory.db";
+
+    public static class ProductJoinEntry implements BaseColumns {
+
+        public static final String TABLE_NAME = "product";
+        public static final String COLUMN_SHORTNAME = "shortname";
+        public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_CATEGORYID = "category";
+        public static final String COLUMN_CATEGORYNAME = "categoryName";
+        public static final String COLUMN_MODELCODE = "modelcode";
+        public static final String COLUMN_SUBCATEGORY = "subcategory";
+        public static final String COLUMN_QUANTITY = "quantity";
+        public static final String COLUMN_TIPOID = "type";
+        public static final String COLUMN_TIPONAME = "typeName";
+        public static final String COLUMN_SECTIONID = "section";
+        public static final String COLUMN_PRODUCTCLASSID = "classID";
+        public static final String COLUMN_STATUS = "status";
+        public static final String COLUMN_SERIAL = "serial";
+        public static final String COLUMN_VALUE = "value";
+        public static final String COLUMN_VENDOR = "vendor";
+        public static final String COLUMN_URL = "url";
+        public static final String COLUMN_DATEPURCHASE = "datepurchase";
+        public static final String COLUMN_NOTES = "notes";
+        private static final String COLUMN_BITMAP = "bitmap";
+        private static final String COLUMN_IMAGEBASE64 = "imageBase64";
+        private static final String COLUMN_IMAGENAME = "imageName";
+        public static final String[] ALL_COLUMNS = new String[] {
+                BaseColumns._ID, COLUMN_SERIAL, COLUMN_MODELCODE,
+                COLUMN_SHORTNAME, COLUMN_DESCRIPTION,COLUMN_CATEGORYID,COLUMN_CATEGORYNAME,
+                COLUMN_SUBCATEGORY,COLUMN_TIPOID,COLUMN_TIPONAME,COLUMN_SECTIONID,
+                COLUMN_STATUS,COLUMN_QUANTITY,COLUMN_VALUE,
+                COLUMN_VENDOR,COLUMN_BITMAP,COLUMN_IMAGEBASE64,
+                COLUMN_IMAGENAME,COLUMN_URL,COLUMN_DATEPURCHASE,
+                COLUMN_NOTES
+        };
+
+
+        public static final String PRODUCT_INNER =String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, CategoryEntry.TABLE_NAME, COLUMN_CATEGORYID,CategoryEntry.TABLE_NAME,CategoryEntry._ID)
+                +String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, COLUMN_PRODUCTCLASSID, ProductEntry.TABLE_NAME,ProductEntry._ID);
+        public static HashMap<String, String> sProductInnerProjectionMap;
+        static {
+            sProductInnerProjectionMap= new HashMap<>();
+            sProductInnerProjectionMap.put(ProductEntry._ID,ProductEntry.TABLE_NAME+"."+ProductEntry._ID);
+        }
+    }
+
 
     public static class ProductEntry implements BaseColumns {
         public static final String TABLE_NAME = "product";
 
-        public static final String COLUMN_PRODUCTID = "id";
+        public static final String COLUMN_SHORTNAME = "shortname";
         public static final String COLUMN_DESCRIPTION = "description";
-        public static final String COLUMN_CATEGORY = "category";
+        public static final String COLUMN_CATEGORYID = "category";
+        public static final String COLUMN_MODELCODE = "modelcode";
         public static final String COLUMN_SUBCATEGORY = "subcategory";
-        public static final String COLUMN_CLASS = "class";
-        public static final String COLUMN_TIPO = "type";
+        public static final String COLUMN_QUANTITY = "quantity";
+        public static final String COLUMN_TIPOID = "type";
         public static final String COLUMN_SECTIONID = "section";
-        public static final String COLUMN_DEPENDENCYID = "sectionid";
-        public static final String COLUMN_INVENTORYID = "inventoryid";
         public static final String COLUMN_STATUS = "status";
         public static final String COLUMN_SERIAL = "serial";
-        public static final String COLUMN_CANTIDAD = "cantidad";
         public static final String COLUMN_VALUE = "value";
         public static final String COLUMN_VENDOR = "vendor";
         public static final String COLUMN_URL = "url";
         public static final String COLUMN_DATEPURCHASE = "datepurchase";
         public static final String COLUMN_NOTES = "notes";
 
+        private static final String COLUMN_BITMAP = "bitmap";
+        private static final String COLUMN_IMAGEBASE64 = "imageBase64";
+        private static final String COLUMN_IMAGENAME = "imageName";
+
         public static final String[] ALL_COLUMNS = new String[] {
-                BaseColumns._ID, COLUMN_DESCRIPTION, COLUMN_DEPENDENCYID, COLUMN_SECTIONID, COLUMN_CATEGORY, COLUMN_TIPO, COLUMN_SECTIONID
+                BaseColumns._ID, COLUMN_SERIAL, COLUMN_MODELCODE,
+                COLUMN_SHORTNAME, COLUMN_DESCRIPTION,COLUMN_CATEGORYID,
+                COLUMN_SUBCATEGORY,COLUMN_TIPOID,COLUMN_SECTIONID,
+                COLUMN_STATUS,COLUMN_QUANTITY,COLUMN_VALUE,
+                COLUMN_VENDOR,COLUMN_BITMAP,COLUMN_IMAGEBASE64,
+                COLUMN_IMAGENAME,COLUMN_URL,COLUMN_DATEPURCHASE,
+                COLUMN_NOTES
         };
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " + "%s TEXT NOT NULL, " + "%s INTEGER NOT NULL, " +
-                        "%s INTEGER NOT NULL, " + "%s INTEGER NOT NULL, " + "%s INTEGER NOT NULL, " +
-                        "FOREIGN KEY (%s) REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE RESTRICT)" +
-                        "FOREIGN KEY (%s) REFERENCES %s(%s) ON UPDATE CASCADE ON DELETE RESTRICT)",
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, " +
+
+                        "%s INTEGER NOT NULL, " +
+                        "%s INTEGER NOT NULL, " +
+                        "%s INTEGER NOT NULL, " +
+                        "%s INTEGER NOT NULL, " +
+                        "%s INTEGER NOT NULL, " +
+                        "%s INTEGER NOT NULL, "+
+
+                        "%s REAL NOT NULL, "
+
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL, "
+                        + "%s TEXT NOT NULL) ",
+
                 TABLE_NAME,
                 BaseColumns._ID,
-                COLUMN_DESCRIPTION,
-                COLUMN_DEPENDENCYID,
-                COLUMN_SECTIONID,
-                COLUMN_CATEGORY,
-                COLUMN_TIPO,
-                COLUMN_SECTIONID,
-                SectorEntry.TABLE_NAME,
-                BaseColumns._ID,
-                COLUMN_DEPENDENCYID,
-                DependencyEntry.TABLE_NAME,
-                BaseColumns._ID);
 
-        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) VALUES (%s, '%s', '%s', '%s', '%s'), (%s, '%s', '%s', '%s', '%s'), (%s, '%s', '%s', '%s', '%s')",
-                TABLE_NAME, COLUMN_DESCRIPTION, COLUMN_DEPENDENCYID, COLUMN_SECTIONID, COLUMN_CATEGORY, COLUMN_TIPO,
-                "ProductoA", "1", "1", "1", "1",
-                "ProductoB", "2", "2", "2", "2",
-                "ProductoC", "3", "3", "3", "3");
+                COLUMN_SERIAL,//text
+                COLUMN_MODELCODE,//text
+                COLUMN_SHORTNAME,//text
+                COLUMN_DESCRIPTION,//text
+
+                COLUMN_CATEGORYID,//int
+                COLUMN_SUBCATEGORY,//int
+                COLUMN_TIPOID,//int
+                COLUMN_SECTIONID,//int
+                COLUMN_STATUS,//int
+                COLUMN_QUANTITY,//int
+
+                COLUMN_VALUE,//double
+
+                COLUMN_VENDOR,//string
+                COLUMN_BITMAP,//string
+                COLUMN_IMAGEBASE64,//string
+                COLUMN_IMAGENAME,//string
+                COLUMN_URL,//string
+                COLUMN_DATEPURCHASE,//string
+                COLUMN_NOTES//string
+                )
+                ;
+
+        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s) VALUES ('%s', '%s', '%s', '%s', %s,%s, %s, %s, %s, %s,%s, '%s', '%s', '%s', '%s','%s', '%s', '%s')",
+                TABLE_NAME,
+                COLUMN_SERIAL,//text
+                COLUMN_MODELCODE,//text
+                COLUMN_SHORTNAME,//text
+                COLUMN_DESCRIPTION,//text
+
+                COLUMN_CATEGORYID,//int
+                COLUMN_SUBCATEGORY,//int
+                COLUMN_TIPOID,//int
+                COLUMN_SECTIONID,//int
+                COLUMN_STATUS,//int
+                COLUMN_QUANTITY,//int
+
+                COLUMN_VALUE,//double
+
+                COLUMN_VENDOR,//string
+                COLUMN_BITMAP,//string
+                COLUMN_IMAGEBASE64,//string
+                COLUMN_IMAGENAME,//string
+                COLUMN_URL,//string
+                COLUMN_DATEPURCHASE,//string
+                COLUMN_NOTES,//string
+
+                "1", "1", "ProductoA", "Description", "1","1", "1", "1", "1","1", "1", "1", "1","1", "1", "1", "1","1", "1");
 
         public static final String SQL_DELETE_ENTRIES = String.format("DROP TABLE IF EXISTS %s", TABLE_NAME);
 
@@ -183,17 +291,13 @@ public final class InventoryContract {
                         "%s TEXT NOT NULL," +
                         "%s TEXT NOT NULL," +
                         "%s TEXT NOT NULL," +
-                        "%s INTEGER NULL" +
-                        "FOREIGN KEY (%s) REFERENCES %s (%s) on update cascade on delete restrict )",
+                        "%s INTEGER NOT NULL)" ,
                 TABLE_NAME,
                 BaseColumns._ID,
                 COLUMN_NAME,
                 COLUMN_SHORTNAME,
                 COLUMN_DESCRIPTION,
-                COLUMN_DEPENDENCYID,
-                COLUMN_DEPENDENCYID,
-                DependencyEntry.TABLE_NAME,
-                BaseColumns._ID
+                COLUMN_DEPENDENCYID
         );
 
         /**

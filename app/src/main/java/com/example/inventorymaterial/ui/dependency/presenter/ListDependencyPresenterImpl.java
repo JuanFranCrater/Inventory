@@ -1,20 +1,13 @@
 package com.example.inventorymaterial.ui.dependency.presenter;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.inventorymaterial.data.db.model.Dependency;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyContrat;
 import com.example.inventorymaterial.ui.dependency.contrat.ListDependencyInteractor;
 import com.example.inventorymaterial.ui.dependency.interactor.ListDependencyInteractorImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by usuario on 23/11/17.

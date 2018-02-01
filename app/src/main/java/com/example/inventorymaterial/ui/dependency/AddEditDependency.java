@@ -35,6 +35,7 @@ public class AddEditDependency extends BaseFragment implements AddEditContrat.Vi
     public void setPresenter(BasePresenter presenter) {
     this.presenter= (AddEditContrat.Presenter) presenter;
     }
+
     public static AddEditDependency newInstance(Bundle arguments) {
         AddEditDependency addEditDependency = new AddEditDependency();
         mode=new AddEdit();
