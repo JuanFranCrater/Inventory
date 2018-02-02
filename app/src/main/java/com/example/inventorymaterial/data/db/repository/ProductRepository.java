@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.inventorymaterial.data.db.dao.ProductDao;
 import com.example.inventorymaterial.data.db.model.Product;
+import com.example.inventorymaterial.data.db.model.ProductInner;
 
 import java.util.ArrayList;
 
@@ -32,5 +33,9 @@ public class ProductRepository {
         if (repository == null)
             repository = new ProductRepository();
         return repository;
+    }
+
+    public ProductInner getProducto(int id) {
+        return dao.search(id);
     }
 }

@@ -110,9 +110,9 @@
             app:layout_constraintStart_toStartOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/txvModelo" />
 
-        <Spinner
+        <EditText
             android:id="@+id/spnCategoria"
-            style="@style/styleSpinner"
+            style="@style/edtProductsActivyty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/barrera"
             app:layout_constraintTop_toTopOf="@+id/txvCategoria"
@@ -125,9 +125,9 @@
             app:layout_constraintStart_toStartOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/txvCategoria" />
 
-        <Spinner
+        <EditText
             android:id="@+id/spnSubcategoria"
-            style="@style/styleSpinner"
+            style="@style/edtProductsActivyty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/barrera"
             app:layout_constraintTop_toTopOf="@+id/txvSubcategoria"
@@ -141,9 +141,9 @@
             app:layout_constraintStart_toStartOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/txvSubcategoria" />
 
-        <Spinner
+        <EditText
             android:id="@+id/spnTipo"
-            style="@style/styleSpinner"
+            style="@style/edtProductsActivyty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/barrera"
             app:layout_constraintTop_toTopOf="@+id/txvTipo"

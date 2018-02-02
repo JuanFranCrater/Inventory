@@ -59,8 +59,8 @@ public final class InventoryContract {
 
 
         public static final String PRODUCT_INNER =String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, CategoryEntry.TABLE_NAME, COLUMN_CATEGORYID,CategoryEntry.TABLE_NAME,CategoryEntry._ID)
-                +String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, TipoEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, TipoEntry.TABLE_NAME,TipoEntry._ID)
-                +String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, SectorEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, SectorEntry.TABLE_NAME,SectorEntry._ID);
+                +String.format("INNER JOIN %s ON %s=%s.%s ", TipoEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, TipoEntry.TABLE_NAME,TipoEntry._ID)
+                +String.format("INNER JOIN %s ON %s=%s.%s ", SectorEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, SectorEntry.TABLE_NAME,SectorEntry._ID);
 
         public static HashMap<String, String> sProductInnerProjectionMap;
 
@@ -73,6 +73,7 @@ public final class InventoryContract {
             sProductInnerProjectionMap.put(COLUMN_DESCRIPTION,ProductJoinEntry.TABLE_NAME+"."+ProductJoinEntry.COLUMN_DESCRIPTION);
             sProductInnerProjectionMap.put(COLUMN_CATEGORYID,COLUMN_CATEGORYID);
             sProductInnerProjectionMap.put(COLUMN_CATEGORYNAME,CategoryEntry.TABLE_NAME+"."+CategoryEntry.COLUMN_NAME);
+            sProductInnerProjectionMap.put(COLUMN_SUBCATEGORY,COLUMN_SUBCATEGORY);
             sProductInnerProjectionMap.put(COLUMN_TIPOID,COLUMN_TIPOID);
             sProductInnerProjectionMap.put(COLUMN_TIPONAME,TipoEntry.TABLE_NAME+"."+TipoEntry.COLUMN_NAME);
             sProductInnerProjectionMap.put(COLUMN_SECTIONID,COLUMN_SECTIONID);

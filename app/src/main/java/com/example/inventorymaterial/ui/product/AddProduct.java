@@ -3,6 +3,7 @@ package com.example.inventorymaterial.ui.product;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.inventorymaterial.R;
 import com.example.inventorymaterial.data.db.model.Product;
+import com.example.inventorymaterial.data.db.model.ProductInner;
 import com.example.inventorymaterial.ui.base.BaseFragment;
 import com.example.inventorymaterial.ui.base.BasePresenter;
 import com.example.inventorymaterial.ui.product.Presenter.AddProductPresenterImpl;
@@ -28,6 +30,7 @@ public class AddProduct  extends BaseFragment implements AddProductContrat.View{
     private ListProduct.ListProductListener callback;
     private AddProductContrat.Presenter presenter;
     private Product product;
+    private ProductInner productInner;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,22 +66,25 @@ public class AddProduct  extends BaseFragment implements AddProductContrat.View{
         presenter.onDestroy();
     }
 
+    EditText edtNombre,edtSerial,edtVendedor,edtModelo,edtDescripcion,edtPrecio,edtFechaCompra,edtUrl,edtNotas,edtCategory,edttipo,edtSubcategory;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         this.presenter= new AddProductPresenterImpl(this);
         View rootView = inflater.inflate(R.layout.fragment_add_edit_product,container,false);
-        EditText edtNombre =rootView.findViewById(R.id.edtNombre);
-        EditText edtSerial = rootView.findViewById(R.id.edtSerial);
-        EditText edtVendedor =rootView.findViewById(R.id.edtVendedor);
-        EditText edtModelo = rootView.findViewById(R.id.edtModelo);
-        EditText edtDescripcion = rootView.findViewById(R.id.edtDescripcion);
-        EditText edtPrecio = rootView.findViewById(R.id.edtPrecio);
-        EditText edtFechaCompra = rootView.findViewById(R.id.edtFechaCompra);
-        EditText edtUrl = rootView.findViewById(R.id.edtUrl);
-        EditText edtNotas = rootView.findViewById(R.id.edtNotas);
-
+        edtNombre=rootView.findViewById(R.id.edtNombre);
+        edtSerial = rootView.findViewById(R.id.edtSerial);
+        edtVendedor =rootView.findViewById(R.id.edtVendedor);
+        edtModelo = rootView.findViewById(R.id.edtModelo);
+        edtDescripcion = rootView.findViewById(R.id.edtDescripcion);
+        edtPrecio = rootView.findViewById(R.id.edtPrecio);
+        edtFechaCompra = rootView.findViewById(R.id.edtFechaCompra);
+        edtUrl = rootView.findViewById(R.id.edtUrl);
+        edtNotas = rootView.findViewById(R.id.edtNotas);
+        edtCategory=rootView.findViewById(R.id.spnCategoria);
+        edtSubcategory=rootView.findViewById(R.id.spnSubcategoria);
+        edttipo=rootView.findViewById(R.id.spnTipo);
         if(getArguments()!=null)//es editar
         {
             product=getArguments().getParcelable("Product");
@@ -91,6 +97,7 @@ public class AddProduct  extends BaseFragment implements AddProductContrat.View{
             edtFechaCompra.setText(product.getBuyDate());
             edtUrl.setText(product.getUrl());
             edtNotas.setText(product.getNotes());
+            presenter.loadSpinners(product.getId());
         }
         Log.d("Datos",product.getShortname());
         return rootView;
@@ -108,5 +115,12 @@ public class AddProduct  extends BaseFragment implements AddProductContrat.View{
     @Override
     public void setPresenter(BasePresenter presenter) {
         this.presenter= (AddProductContrat.Presenter) presenter;
+    }
+
+    @Override
+    public void loadSpinners(ProductInner producto) {
+        edttipo.setText(producto.getTypeName());
+        edtCategory.setText(producto.getCategorieName());
+        edtSubcategory.setText(producto.getSubcategorieID());
     }
 }
