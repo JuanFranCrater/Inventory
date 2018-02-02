@@ -62,4 +62,15 @@
     <string name="sort_by_name">Sort by Name</string>
 
 
+    <string name="txvNameProducts">Nombre:</string>
+    <string name="txvSerial">Serial:</string>
+    <string name="txvVendedor">Vendedor:</string>
+    <string name="txvModelo">Modelo:</string>
+    <string name="txvCategoria">Categoria:</string>
+    <string name="txvSubcategoria">Subcategoria:</string>
+    <string name="txvTipo">Tipo:</string>
+    <string name="txvPrecio">Precio:</string>
+    <string name="txvFechaCompra">F. compra:</string>
+    <string name="txvUrl">Url:</string>
+    <string name="txvNotas">Notas:</string>
 </resources>

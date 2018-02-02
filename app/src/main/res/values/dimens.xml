@@ -15,4 +15,12 @@
     <dimen name="list_secondary_text">14sp</dimen>
     <dimen name="switchHeith">48dp</dimen>
     <dimen name="switchWidth">48dp</dimen>
+    <dimen name="edtHeight">40dp</dimen>
+    <dimen name="edtWidth">180dp</dimen>
+    <dimen name="txvSizeProducts">25dp</dimen>
+    <dimen name="txvMarginTop">24dp</dimen>
+    <dimen name="edtProductsPadding">10dp</dimen>
+    <dimen name="edtProductsMarginEnd">24dp</dimen>
+    <dimen name="spnProductsMarginEnd">24dp</dimen>
+    <dimen name="imgQrcodeWidth">10dp</dimen>
 </resources>

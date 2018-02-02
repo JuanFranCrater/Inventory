@@ -2,6 +2,7 @@ package com.example.inventorymaterial.data.db.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.inventorymaterial.data.db.InventoryContract;
@@ -16,16 +17,18 @@ import java.util.ArrayList;
 
 public class ProductDao {
     public ArrayList<Product> loadAll () {
+
         ArrayList<Product> products = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDateBase();
         Cursor cursor = sqLiteDatabase.query(InventoryContract.ProductEntry.TABLE_NAME,
                 InventoryContract.ProductEntry.ALL_COLUMNS,
                 null, null, null,null,
-                null, null);
-
+                BaseColumns._ID, null);
+            products.clear();
         if (cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
+            Log.d("Cursor Inicio", String.valueOf(products.size()));
+            do{
                     Product s = new Product(cursor.getInt(0),
                             cursor.getString(1),cursor.getString(1),
                             cursor.getString(3),cursor.getString(4),
@@ -37,11 +40,11 @@ public class ProductDao {
                             cursor.getString(15), cursor.getString(16),
                             cursor.getString(17), cursor.getString(18));
                 products.add(s);
-            }
+                Log.d("Cursor Final", String.valueOf(products.size()));
+            }while (cursor.moveToNext());
         }
 
         sqLiteDatabase.close();
-        Log.d("Prueba", String.valueOf(products.size()));
         return products;
     }
 }

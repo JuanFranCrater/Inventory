@@ -1,6 +1,7 @@
 package com.example.inventorymaterial.data.db;
 
 import android.provider.BaseColumns;
+import android.speech.SpeechRecognizer;
 
 import com.example.inventorymaterial.data.db.model.Product;
 
@@ -34,7 +35,7 @@ public final class InventoryContract {
         public static final String COLUMN_TIPOID = "type";
         public static final String COLUMN_TIPONAME = "typeName";
         public static final String COLUMN_SECTIONID = "section";
-        public static final String COLUMN_PRODUCTCLASSID = "classID";
+        public static final String COLUMN_SECTIONNAME="sectionName";
         public static final String COLUMN_STATUS = "status";
         public static final String COLUMN_SERIAL = "serial";
         public static final String COLUMN_VALUE = "value";
@@ -45,6 +46,7 @@ public final class InventoryContract {
         private static final String COLUMN_BITMAP = "bitmap";
         private static final String COLUMN_IMAGEBASE64 = "imageBase64";
         private static final String COLUMN_IMAGENAME = "imageName";
+
         public static final String[] ALL_COLUMNS = new String[] {
                 BaseColumns._ID, COLUMN_SERIAL, COLUMN_MODELCODE,
                 COLUMN_SHORTNAME, COLUMN_DESCRIPTION,COLUMN_CATEGORYID,COLUMN_CATEGORYNAME,
@@ -57,12 +59,36 @@ public final class InventoryContract {
 
 
         public static final String PRODUCT_INNER =String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, CategoryEntry.TABLE_NAME, COLUMN_CATEGORYID,CategoryEntry.TABLE_NAME,CategoryEntry._ID)
-                +String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, COLUMN_PRODUCTCLASSID, ProductEntry.TABLE_NAME,ProductEntry._ID);
+                +String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, TipoEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, TipoEntry.TABLE_NAME,TipoEntry._ID)
+                +String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, SectorEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, SectorEntry.TABLE_NAME,SectorEntry._ID);
+
         public static HashMap<String, String> sProductInnerProjectionMap;
+
         static {
             sProductInnerProjectionMap= new HashMap<>();
             sProductInnerProjectionMap.put(ProductEntry._ID,ProductEntry.TABLE_NAME+"."+ProductEntry._ID);
+            sProductInnerProjectionMap.put(COLUMN_SERIAL,COLUMN_SERIAL);
+            sProductInnerProjectionMap.put(COLUMN_MODELCODE,COLUMN_MODELCODE);
+            sProductInnerProjectionMap.put(COLUMN_SHORTNAME,ProductJoinEntry.TABLE_NAME+"."+ProductJoinEntry.COLUMN_SHORTNAME);
+            sProductInnerProjectionMap.put(COLUMN_DESCRIPTION,ProductJoinEntry.TABLE_NAME+"."+ProductJoinEntry.COLUMN_DESCRIPTION);
+            sProductInnerProjectionMap.put(COLUMN_CATEGORYID,COLUMN_CATEGORYID);
+            sProductInnerProjectionMap.put(COLUMN_CATEGORYNAME,CategoryEntry.TABLE_NAME+"."+CategoryEntry.COLUMN_NAME);
+            sProductInnerProjectionMap.put(COLUMN_TIPOID,COLUMN_TIPOID);
+            sProductInnerProjectionMap.put(COLUMN_TIPONAME,TipoEntry.TABLE_NAME+"."+TipoEntry.COLUMN_NAME);
+            sProductInnerProjectionMap.put(COLUMN_SECTIONID,COLUMN_SECTIONID);
+            sProductInnerProjectionMap.put(COLUMN_SECTIONNAME,SectorEntry.TABLE_NAME+"."+SectorEntry.COLUMN_NAME);
+            sProductInnerProjectionMap.put(COLUMN_STATUS,COLUMN_STATUS);
+            sProductInnerProjectionMap.put(COLUMN_QUANTITY,COLUMN_QUANTITY);
+            sProductInnerProjectionMap.put(COLUMN_VALUE,COLUMN_VALUE);
+            sProductInnerProjectionMap.put(COLUMN_VENDOR,COLUMN_VENDOR);
+            sProductInnerProjectionMap.put(COLUMN_BITMAP,COLUMN_BITMAP);
+            sProductInnerProjectionMap.put(COLUMN_IMAGEBASE64,COLUMN_IMAGEBASE64);
+            sProductInnerProjectionMap.put(COLUMN_IMAGENAME,COLUMN_IMAGENAME);
+            sProductInnerProjectionMap.put(COLUMN_URL,COLUMN_URL);
+            sProductInnerProjectionMap.put(COLUMN_DATEPURCHASE,COLUMN_DATEPURCHASE);
+            sProductInnerProjectionMap.put(COLUMN_NOTES,COLUMN_NOTES);
         }
+
     }
 
 
@@ -183,10 +209,12 @@ public final class InventoryContract {
 
         public static final String TABLE_NAME = "categoria";
         public static final String COLUMN_NAME = "nombre";
+        public static final String COLUMN_SHORTNAME = "shortname";
+        public static final String COLUMN_DESCRIPTION = "description";
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " + "%s TEXT NOT NULL)", TABLE_NAME, BaseColumns._ID, COLUMN_NAME);
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " + "%s TEXT NOT NULL"+ "%s TEXT NOT NULL"+ "%s TEXT NOT NULL)", TABLE_NAME, BaseColumns._ID, COLUMN_NAME,COLUMN_SHORTNAME,COLUMN_DESCRIPTION);
 
-        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s) VALUES ('%s'), ('%s'), ('%s')", TABLE_NAME, COLUMN_NAME, "CategoríaA", "CategoríaB", "CategoríaC");
+        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s) VALUES ('%s','%s','%s'), ('%s','%s','%s'), ('%s','%s','%s')", TABLE_NAME, COLUMN_NAME, "CategoríaA","CA","Description", "CategoríaB","CB","Description", "CategoríaC","CC","Description");
 
     }
 

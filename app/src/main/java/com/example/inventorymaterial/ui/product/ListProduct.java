@@ -91,7 +91,7 @@ public class ListProduct extends ListFragment implements ListProductContrat.View
         this.presenter= new ListProductPresenterImpl(this);
         //Como el fragment mantiene el estado/y sólo elimina la vista)
         //se debe reinicializar el presenter cuando se crea la vista
-        View rootView = inflater.inflate(R.layout.fragment_list_dependency,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_list_product,container,false);
         setHasOptionsMenu(true);
         //Como se encuentra en el fragment, usamos rootView
         FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
@@ -118,7 +118,7 @@ public class ListProduct extends ListFragment implements ListProductContrat.View
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle bnd = new Bundle();
                 bnd.putParcelable(Product.TAG, (Product)adapterView.getItemAtPosition(i));
-              //  callback.addNewProduct(bnd);
+              callback.addNewProduct(bnd);
             }
         });
         presenter.loadProducts();

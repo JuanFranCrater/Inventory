@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import com.example.inventorymaterial.data.db.InventoryContract;
 import com.example.inventorymaterial.data.db.InventoryOpenHelper;
@@ -23,6 +24,7 @@ public class SectorDao {
                 null, null);
 
         if (cursor.moveToFirst()) {
+
             while (cursor.moveToNext()) {
                 Sector s = new Sector(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
                         cursor.getString(3), cursor.getInt(4), false, false);
