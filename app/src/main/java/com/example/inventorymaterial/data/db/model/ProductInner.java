@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class ProductInner implements Parcelable {
 
-    String categorieName,typeName,SectorName;
+    String categorieName,typeName,SectorName,subcategorieName;
     private int id;
     private String serial;
     private String modelcode;
@@ -30,7 +30,7 @@ public class ProductInner implements Parcelable {
     private String buyDate;
     private String notes;
 
-    public ProductInner(int id, String serial, String modelcode, String shortname, String description, int categorieID,String categorieName, int subcategorieID, int typeID,String typeName, int sectorID,String SectorName, int status, int quantity, double value, String vendor, String bitmap, String imageBase64, String imageName, String url, String buyDate, String notes) {
+    public ProductInner(int id, String serial, String modelcode, String shortname, String description, int categorieID,String categorieName, int subcategorieID,String subcategorieName, int typeID,String typeName, int sectorID,String SectorName, int status, int quantity, double value, String vendor, String bitmap, String imageBase64, String imageName, String url, String buyDate, String notes) {
         this.id = id;
         this.serial = serial;
         this.modelcode = modelcode;
@@ -38,6 +38,7 @@ public class ProductInner implements Parcelable {
         this.description = description;
         this.categorieID = categorieID;
         this.subcategorieID = subcategorieID;
+        this.subcategorieName=subcategorieName;
         this.typeID = typeID;
         this.sectorID = sectorID;
         this.status = status;
@@ -55,10 +56,19 @@ public class ProductInner implements Parcelable {
         this.SectorName=SectorName;
     }
 
+    public String getSubcategorieName() {
+        return subcategorieName;
+    }
+
+    public void setSubcategorieName(String subcategorieName) {
+        this.subcategorieName = subcategorieName;
+    }
+
     protected ProductInner(Parcel in) {
         categorieName = in.readString();
         typeName = in.readString();
         SectorName = in.readString();
+        subcategorieName = in.readString();
         id = in.readInt();
         serial = in.readString();
         modelcode = in.readString();
@@ -80,6 +90,38 @@ public class ProductInner implements Parcelable {
         notes = in.readString();
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(categorieName);
+        dest.writeString(typeName);
+        dest.writeString(SectorName);
+        dest.writeString(subcategorieName);
+        dest.writeInt(id);
+        dest.writeString(serial);
+        dest.writeString(modelcode);
+        dest.writeString(shortname);
+        dest.writeString(description);
+        dest.writeInt(categorieID);
+        dest.writeInt(subcategorieID);
+        dest.writeInt(typeID);
+        dest.writeInt(sectorID);
+        dest.writeInt(status);
+        dest.writeInt(quantity);
+        dest.writeDouble(value);
+        dest.writeString(vendor);
+        dest.writeString(bitmap);
+        dest.writeString(imageBase64);
+        dest.writeString(imageName);
+        dest.writeString(url);
+        dest.writeString(buyDate);
+        dest.writeString(notes);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<ProductInner> CREATOR = new Creator<ProductInner>() {
         @Override
         public ProductInner createFromParcel(Parcel in) {
@@ -91,37 +133,6 @@ public class ProductInner implements Parcelable {
             return new ProductInner[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(categorieName);
-        parcel.writeString(typeName);
-        parcel.writeString(SectorName);
-        parcel.writeInt(id);
-        parcel.writeString(serial);
-        parcel.writeString(modelcode);
-        parcel.writeString(shortname);
-        parcel.writeString(description);
-        parcel.writeInt(categorieID);
-        parcel.writeInt(subcategorieID);
-        parcel.writeInt(typeID);
-        parcel.writeInt(sectorID);
-        parcel.writeInt(status);
-        parcel.writeInt(quantity);
-        parcel.writeDouble(value);
-        parcel.writeString(vendor);
-        parcel.writeString(bitmap);
-        parcel.writeString(imageBase64);
-        parcel.writeString(imageName);
-        parcel.writeString(url);
-        parcel.writeString(buyDate);
-        parcel.writeString(notes);
-    }
 
     public String getCategorieName() {
         return categorieName;

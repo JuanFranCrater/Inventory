@@ -7,14 +7,14 @@ import android.os.AsyncTask;
 import android.provider.BaseColumns;
 import com.example.inventorymaterial.data.db.InventoryContract;
 import com.example.inventorymaterial.data.db.InventoryOpenHelper;
+import com.example.inventorymaterial.data.db.dao.daoInterface.daoDependencyInterface;
 import com.example.inventorymaterial.data.db.model.Dependency;
 
 import java.util.ArrayList;
 
 
-public class DependencyDao {
-
-
+public class DependencyDaoImpl implements daoDependencyInterface {
+    @Override
     public ArrayList<Dependency> loadAll()
     {
         final ArrayList<Dependency> dependencies=new ArrayList<>();
@@ -37,13 +37,13 @@ public class DependencyDao {
             InventoryOpenHelper.getInstance().closeDateBase();
         return dependencies;
     }
-
+    @Override
     public boolean contains(Dependency dependency)
     {
         return false;
     }
 
-
+    @Override
     public int update(Dependency d) {
         SQLiteDatabase sqLiteDatabase=InventoryOpenHelper.getInstance().openDateBase();
         ContentValues contentValues=createContent(d);
@@ -53,7 +53,7 @@ public class DependencyDao {
         InventoryOpenHelper.getInstance().closeDateBase();
         return solucion;
     }
-
+    @Override
     public long delete(Dependency d) {
         SQLiteDatabase sqLiteDatabase=InventoryOpenHelper.getInstance().openDateBase();
         String where=BaseColumns._ID+"=?";
@@ -62,6 +62,7 @@ public class DependencyDao {
         InventoryOpenHelper.getInstance().closeDateBase();
         return solucion;
     }
+    @Override
     public ContentValues createContent(Dependency d)
     {
         ContentValues contentValues=new ContentValues();
@@ -71,11 +72,12 @@ public class DependencyDao {
         contentValues.put(InventoryContract.DependencyEntry.COLUMN_IMAGENAME,d.getImageName());
         return contentValues;
     }
+    @Override
     public boolean exists(Dependency d) {
         return false;
 
     }
-
+    @Override
     public void save(String name, String shortName, String description, String imageName) {
         SQLiteDatabase sqLiteDatabase=InventoryOpenHelper.getInstance().openDateBase();
         ContentValues contentValues=new ContentValues();

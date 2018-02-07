@@ -115,10 +115,7 @@ public class ListDependency extends ListFragment implements ListDependencyContra
         super.onCreate(savedInstanceState);
         this.dependencyAdapter = new DependencyAdapter(getActivity());
         setRetainInstance(true);
-        progressDialog= new ProgressDialog(getActivity());
-        progressDialog.setMessage("Cargando");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
+
 
     }
 
@@ -184,9 +181,11 @@ public class ListDependency extends ListFragment implements ListDependencyContra
                 return true;
             }
         });
-
+        progressDialog= new ProgressDialog(getActivity());
+        progressDialog.setMessage("Cargando");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
         presenter.loadDependency();
-
     }
 
     public void showDependency(List<Dependency> list)

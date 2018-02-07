@@ -32,28 +32,25 @@ public class ProductDao {
                null,null,null);
 
         String selection = InventoryContract.ProductJoinEntry.TABLE_NAME+"."+InventoryContract.ProductJoinEntry._ID+"=?";
-        String[] selectionArgs = {id+""};
+          String[] selectionArgs = {id+""};
 
         Cursor cursor=sqLiteQueryBuilder.query(sqLiteDatabase,InventoryContract.ProductJoinEntry.ALL_COLUMNS,selection,selectionArgs,null,null,null);
+        ProductInner s = null;
         if (cursor.moveToFirst()) {
-                ProductInner s = new ProductInner(cursor.getInt(0),
-                        cursor.getString(1),cursor.getString(1),
-                        cursor.getString(3),cursor.getString(4),
-                        cursor.getInt(5),cursor.getString(6),
-                        cursor.getInt(7),cursor.getInt(8),
-                        cursor.getString(9),cursor.getInt(10),
-                        cursor.getString(11),cursor.getInt(12),
-                        cursor.getInt(13), cursor.getDouble(14),
-                        cursor.getString(15), cursor.getString(16),
-                        cursor.getString(17), cursor.getString(18),
-                        cursor.getString(19),cursor.getString(20),
-                        cursor.getString(21));
-            sqLiteDatabase.close();
-            return s;
+                 s = new ProductInner(cursor.getInt(0),//ID
+                        cursor.getString(1),cursor.getString(1),//Serial y modelcode
+                        cursor.getString(3),cursor.getString(4),//shortname y description
+                        cursor.getInt(5),cursor.getString(6),//category
+                        cursor.getInt(7),cursor.getString(8),//subcategory
+                        cursor.getInt(9),cursor.getString(10),//type
+                        cursor.getInt(11),cursor.getString(12),//sector
+                        cursor.getInt(13), cursor.getInt(14),//status y quantity
+                        cursor.getDouble(15), cursor.getString(16),//value y vendor
+                        cursor.getString(17), cursor.getString(18),//images
+                        cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22));//url date y notes
         }
-        cursor.close();
-        sqLiteDatabase.close();
-       return null;
+        InventoryOpenHelper.getInstance().closeDateBase();
+       return s;
 
     }
 
@@ -68,7 +65,6 @@ public class ProductDao {
                 BaseColumns._ID, null);
             products.clear();
         if (cursor.moveToFirst()) {
-            Log.d("Cursor Inicio", String.valueOf(products.size()));
             do{
                     Product s = new Product(cursor.getInt(0),
                             cursor.getString(1),cursor.getString(1),
@@ -81,11 +77,10 @@ public class ProductDao {
                             cursor.getString(15), cursor.getString(16),
                             cursor.getString(17), cursor.getString(18));
                 products.add(s);
-                Log.d("Cursor Final", String.valueOf(products.size()));
             }while (cursor.moveToNext());
         }
 
-        sqLiteDatabase.close();
+        InventoryOpenHelper.getInstance().closeDateBase();
         return products;
     }
 }

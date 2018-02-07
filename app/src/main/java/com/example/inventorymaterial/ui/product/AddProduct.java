@@ -119,8 +119,14 @@ public class AddProduct  extends BaseFragment implements AddProductContrat.View{
 
     @Override
     public void loadSpinners(ProductInner producto) {
-        edttipo.setText(producto.getTypeName());
-        edtCategory.setText(producto.getCategorieName());
-        edtSubcategory.setText(producto.getSubcategorieID());
+        try {
+            edttipo.setText(producto.getTypeName());
+            edtCategory.setText(producto.getCategorieName());
+            edtSubcategory.setText(producto.getSubcategorieName());
+        }catch (Exception e) {
+
+        }
+
+
     }
 }

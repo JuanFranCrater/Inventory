@@ -25,20 +25,20 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor, D
 
             @Override
             protected void onPostExecute(ArrayList<Dependency> dependencies) {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
                 listener.onSuccess(dependencies);
             }
 
             @Override
             protected ArrayList<Dependency> doInBackground(Void... voids) {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 return DependencyRepository.getInstance().getDependencies();
             }
         }.execute();
-
     }
 
     @Override

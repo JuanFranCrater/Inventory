@@ -57,6 +57,8 @@ public class InventoryOpenHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(InventoryContract.TipoEntry.SQL_INSERT_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.CategoryEntry.SQL_CREATE_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.CategoryEntry.SQL_INSERT_ENTRIES);
+            sqLiteDatabase.execSQL(InventoryContract.SubCategoryEntry.SQL_CREATE_ENTRIES);
+            sqLiteDatabase.execSQL(InventoryContract.SubCategoryEntry.SQL_INSERT_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.ProductEntry.SQL_CREATE_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.ProductEntry.SQL_INSERT_ENTRIES);
             sqLiteDatabase.execSQL(InventoryContract.DependencyEntry.SQL_CREATE_ENTRIES);
@@ -78,6 +80,10 @@ public class InventoryOpenHelper extends SQLiteOpenHelper {
             db.beginTransaction();
             db.execSQL(InventoryContract.DependencyEntry.SQL_DELETE_ENTRIES);
             db.execSQL(InventoryContract.SectorEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(InventoryContract.CategoryEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(InventoryContract.SubCategoryEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(InventoryContract.TipoEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(InventoryContract.ProductJoinEntry.SQL_DELETE_ENTRIES);
             onCreate(db);
             db.setTransactionSuccessful();
         }catch (SQLiteException e)

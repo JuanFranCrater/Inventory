@@ -1,8 +1,8 @@
 package com.example.inventorymaterial.data.db.repository;
 
 
-import com.example.inventorymaterial.data.db.dao.DependencyDao;
 import com.example.inventorymaterial.data.db.model.Dependency;
+import com.example.inventorymaterial.data.provider.dao.DependencyDao;
 
 import java.util.ArrayList;
 import java.util.Collections;

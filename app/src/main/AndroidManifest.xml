@@ -28,6 +28,10 @@
         <activity android:name=".ui.prefs.GeneralSettingActivity" />
         <activity android:name=".ui.prefs.AccountSettingActivity" />
         <activity android:name=".ui.about.AboutUsActivity" />
+        <provider
+            android:authorities="com.example.inventorymaterial"
+            android:name="com.example.inventorymaterial.data.provider.InventoryProvider"
+            />
     </application>
 
 </manifest>

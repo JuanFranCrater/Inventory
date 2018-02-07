@@ -19,7 +19,7 @@ public final class InventoryContract {
 
     }
 
-    public static final int DATABASE_VERSION=13;
+    public static final int DATABASE_VERSION=19;
     public static final String DATABASE_NAME="Inventory.db";
 
     public static class ProductJoinEntry implements BaseColumns {
@@ -30,7 +30,8 @@ public final class InventoryContract {
         public static final String COLUMN_CATEGORYID = "category";
         public static final String COLUMN_CATEGORYNAME = "categoryName";
         public static final String COLUMN_MODELCODE = "modelcode";
-        public static final String COLUMN_SUBCATEGORY = "subcategory";
+        public static final String COLUMN_SUBCATEGORYID = "subcategory";
+        public static final String COLUMN_SUBCATEGORYNAME = "subcategory";
         public static final String COLUMN_QUANTITY = "quantity";
         public static final String COLUMN_TIPOID = "type";
         public static final String COLUMN_TIPONAME = "typeName";
@@ -43,24 +44,25 @@ public final class InventoryContract {
         public static final String COLUMN_URL = "url";
         public static final String COLUMN_DATEPURCHASE = "datepurchase";
         public static final String COLUMN_NOTES = "notes";
-        private static final String COLUMN_BITMAP = "bitmap";
-        private static final String COLUMN_IMAGEBASE64 = "imageBase64";
-        private static final String COLUMN_IMAGENAME = "imageName";
+        public static final String COLUMN_BITMAP = "bitmap";
+        public static final String COLUMN_IMAGEBASE64 = "imageBase64";
+        public static final String COLUMN_IMAGENAME = "imageName";
 
         public static final String[] ALL_COLUMNS = new String[] {
                 BaseColumns._ID, COLUMN_SERIAL, COLUMN_MODELCODE,
                 COLUMN_SHORTNAME, COLUMN_DESCRIPTION,COLUMN_CATEGORYID,COLUMN_CATEGORYNAME,
-                COLUMN_SUBCATEGORY,COLUMN_TIPOID,COLUMN_TIPONAME,COLUMN_SECTIONID,
+                COLUMN_SUBCATEGORYID,COLUMN_SUBCATEGORYNAME,COLUMN_TIPOID,COLUMN_TIPONAME,COLUMN_SECTIONID,
                 COLUMN_STATUS,COLUMN_QUANTITY,COLUMN_VALUE,
                 COLUMN_VENDOR,COLUMN_BITMAP,COLUMN_IMAGEBASE64,
                 COLUMN_IMAGENAME,COLUMN_URL,COLUMN_DATEPURCHASE,
                 COLUMN_NOTES
         };
-
+        public static final String SQL_DELETE_ENTRIES = String.format("DROP TABLE IF EXISTS %s",TABLE_NAME);
 
         public static final String PRODUCT_INNER =String.format("%s INNER JOIN %s ON %s=%s.%s ",ProductEntry.TABLE_NAME, CategoryEntry.TABLE_NAME, COLUMN_CATEGORYID,CategoryEntry.TABLE_NAME,CategoryEntry._ID)
                 +String.format("INNER JOIN %s ON %s=%s.%s ", TipoEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, TipoEntry.TABLE_NAME,TipoEntry._ID)
-                +String.format("INNER JOIN %s ON %s=%s.%s ", SectorEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, SectorEntry.TABLE_NAME,SectorEntry._ID);
+                +String.format("INNER JOIN %s ON %s=%s.%s ", SectorEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, SectorEntry.TABLE_NAME,SectorEntry._ID)
+                +String.format("INNER JOIN %s ON %s=%s.%s ", SubCategoryEntry.TABLE_NAME, ProductEntry.COLUMN_TIPOID, SubCategoryEntry.TABLE_NAME,SubCategoryEntry._ID);
 
         public static HashMap<String, String> sProductInnerProjectionMap;
 
@@ -73,7 +75,8 @@ public final class InventoryContract {
             sProductInnerProjectionMap.put(COLUMN_DESCRIPTION,ProductJoinEntry.TABLE_NAME+"."+ProductJoinEntry.COLUMN_DESCRIPTION);
             sProductInnerProjectionMap.put(COLUMN_CATEGORYID,COLUMN_CATEGORYID);
             sProductInnerProjectionMap.put(COLUMN_CATEGORYNAME,CategoryEntry.TABLE_NAME+"."+CategoryEntry.COLUMN_NAME);
-            sProductInnerProjectionMap.put(COLUMN_SUBCATEGORY,COLUMN_SUBCATEGORY);
+            sProductInnerProjectionMap.put(COLUMN_SUBCATEGORYID,COLUMN_SUBCATEGORYID);
+            sProductInnerProjectionMap.put(COLUMN_SUBCATEGORYNAME,SubCategoryEntry.TABLE_NAME+"."+SubCategoryEntry.COLUMN_NAME);
             sProductInnerProjectionMap.put(COLUMN_TIPOID,COLUMN_TIPOID);
             sProductInnerProjectionMap.put(COLUMN_TIPONAME,TipoEntry.TABLE_NAME+"."+TipoEntry.COLUMN_NAME);
             sProductInnerProjectionMap.put(COLUMN_SECTIONID,COLUMN_SECTIONID);
@@ -213,9 +216,24 @@ public final class InventoryContract {
         public static final String COLUMN_SHORTNAME = "shortname";
         public static final String COLUMN_DESCRIPTION = "description";
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " + "%s TEXT NOT NULL"+ "%s TEXT NOT NULL"+ "%s TEXT NOT NULL)", TABLE_NAME, BaseColumns._ID, COLUMN_NAME,COLUMN_SHORTNAME,COLUMN_DESCRIPTION);
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," + "%s TEXT NOT NULL,"+ "%s TEXT NOT NULL,"+ "%s TEXT NOT NULL)", TABLE_NAME, BaseColumns._ID, COLUMN_NAME,COLUMN_SHORTNAME,COLUMN_DESCRIPTION);
 
-        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s) VALUES ('%s','%s','%s'), ('%s','%s','%s'), ('%s','%s','%s')", TABLE_NAME, COLUMN_NAME, "CategoríaA","CA","Description", "CategoríaB","CB","Description", "CategoríaC","CC","Description");
+        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s) VALUES ('%s','%s','%s')", TABLE_NAME, COLUMN_NAME, "CategoríaA","CA","Description");
+
+        public static final String SQL_DELETE_ENTRIES = String.format("DROP TABLE IF EXISTS %s",TABLE_NAME);
+    }
+
+    public static class SubCategoryEntry implements BaseColumns {
+
+        public static final String TABLE_NAME = "subcategoria";
+        public static final String COLUMN_NAME = "nombre";
+        public static final String COLUMN_SHORTNAME = "shortname";
+        public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_CATEGORYID = "categoryID";
+
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," + "%s TEXT NOT NULL,"+ "%s TEXT NOT NULL,"+ "%s TEXT NOT NULL,"+"%s INTEGER NOT NULL)", TABLE_NAME, BaseColumns._ID, COLUMN_NAME,COLUMN_SHORTNAME,COLUMN_DESCRIPTION,COLUMN_CATEGORYID);
+        public static final String SQL_DELETE_ENTRIES = String.format("DROP TABLE IF EXISTS %s",TABLE_NAME);
+        public static final String SQL_INSERT_ENTRIES = String.format("INSERT INTO %s (%s) VALUES ('%s','%s','%s','%s')", TABLE_NAME, COLUMN_NAME, "SUBCategoríaA","CA","Description","1");
 
     }
 
@@ -223,7 +241,7 @@ public final class InventoryContract {
 
         public static final String TABLE_NAME = "type";
         public static final String COLUMN_NAME = "nombre";
-
+        public static final String SQL_DELETE_ENTRIES = String.format("DROP TABLE IF EXISTS %s",TABLE_NAME);
         public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s TEXT NOT NULL)",
                 TABLE_NAME,
@@ -236,7 +254,6 @@ public final class InventoryContract {
                 "Tipo1", "Tipo2", "Tipo3");
 
     }
-
 
     // Por cada tabla se crea una clase que implementa la interfaz BaseColumns
     public static class DependencyEntry implements BaseColumns {
