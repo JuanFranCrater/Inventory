@@ -3,7 +3,6 @@ package com.example.inventorymaterial.data.db.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.provider.BaseColumns;
 import com.example.inventorymaterial.data.db.InventoryContract;
 import com.example.inventorymaterial.data.db.InventoryOpenHelper;
@@ -78,7 +77,7 @@ public class DependencyDaoImpl implements daoDependencyInterface {
 
     }
     @Override
-    public void save(String name, String shortName, String description, String imageName) {
+    public long save(String name, String shortName, String description, String imageName) {
         SQLiteDatabase sqLiteDatabase=InventoryOpenHelper.getInstance().openDateBase();
         ContentValues contentValues=new ContentValues();
         contentValues.put(InventoryContract.DependencyEntry.COLUMN_NAME,name);
@@ -87,6 +86,7 @@ public class DependencyDaoImpl implements daoDependencyInterface {
         contentValues.put(InventoryContract.DependencyEntry.COLUMN_IMAGENAME,imageName);
         long solucion= sqLiteDatabase.insert(InventoryContract.DependencyEntry.TABLE_NAME,null, contentValues);
         InventoryOpenHelper.getInstance().closeDateBase();
+        return solucion;
     }
 
 }

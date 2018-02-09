@@ -78,22 +78,137 @@ public class InventoryProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
+        String DIR = "vnd.android.cursor.dir/vnd.";
+        String ITEM = "vnd.android.cursor.item/vnd.";
+
+        switch (uriMatcher.match(uri)) {
+            case PRODUCT:
+                return (DIR+
+                        InventoryProviderContrat.AUTHORITY+"/"+
+                        InventoryProviderContrat.Product.CONTENT_PATH);
+            case PRODUCT_ID:
+                return (ITEM+
+                        InventoryProviderContrat.AUTHORITY+"/"+
+
+                        InventoryProviderContrat.Product.CONTENT_PATH);
+
+            case DEPENDENCY:
+                return (DIR+
+                        InventoryProviderContrat.AUTHORITY+"/"+
+                        InventoryProviderContrat.Dependency.CONTENT_PATH);
+            case DEPENDENCY_ID:
+                return (ITEM+
+                        InventoryProviderContrat.AUTHORITY+"/"+
+                        InventoryProviderContrat.Dependency.CONTENT_PATH);
+
+            case SECTOR:
+                return (DIR+
+                        InventoryProviderContrat.AUTHORITY+"/"+
+                        InventoryProviderContrat.Sector.CONTENT_PATH);
+            case SECTOR_ID:
+                return (ITEM+
+                        InventoryProviderContrat.AUTHORITY+"/"+
+                        InventoryProviderContrat.Sector.CONTENT_PATH);
+
+            case UriMatcher.NO_MATCH:
+                throw new IllegalArgumentException("Invalid Uri: "+ uri);
+
+        }
+
         return null;
     }
 
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
-        return null;
+        Long result = null;
+
+        switch (uriMatcher.match(uri)) {
+            case PRODUCT:
+                break;
+
+            case DEPENDENCY:
+                result = sqLiteDatabase.insert(
+                        InventoryContract.DependencyEntry.TABLE_NAME,
+                        null,
+                        contentValues
+                );
+                break;
+
+            case SECTOR:
+                break;
+
+            case UriMatcher.NO_MATCH:
+                throw new IllegalArgumentException("Invalid Uri: "+ uri);
+
+        }
+
+        if (result==-1){
+            return null;
+        }
+        return Uri.parse(uri+"/"+result);
+
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+        long result = 0;
+
+        switch (uriMatcher.match(uri)) {
+            case PRODUCT:
+                break;
+
+            case DEPENDENCY:
+                result = sqLiteDatabase.delete(
+                        InventoryContract.DependencyEntry.TABLE_NAME,
+                        InventoryProviderContrat.Dependency._ID+"=?",
+                        new String[]{uri.getLastPathSegment()}
+                );
+
+                break;
+
+            case SECTOR:
+                break;
+
+            case UriMatcher.NO_MATCH:
+                throw new IllegalArgumentException("Invalid Uri: "+ uri);
+
+        }
+
+        if (result==-1){
+            return -1;
+        }
+        return Integer.parseInt(String.valueOf(result));
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String where, @Nullable String[] whereArgs) {
+        long result = 0;
+
+        switch (uriMatcher.match(uri)) {
+            case PRODUCT:
+                break;
+
+            case DEPENDENCY:
+                result = sqLiteDatabase.update(
+                        InventoryContract.DependencyEntry.TABLE_NAME,
+                        contentValues,
+                        where,
+                        whereArgs
+                );
+                break;
+
+            case SECTOR:
+                break;
+
+            case UriMatcher.NO_MATCH:
+                throw new IllegalArgumentException("Invalid Uri: "+ uri);
+
+        }
+
+        if (result==-1){
+            return -1;
+        }
+        return Integer.parseInt(String.valueOf(result));
     }
 }

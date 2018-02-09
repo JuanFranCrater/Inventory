@@ -24,5 +24,7 @@ public interface daoDependencyInterface {
 
     boolean exists(Dependency d);
 
-    void save(String name, String shortName, String description, String imageName);
+    long save(Dependency d);
+
+    ContentValues CreateContent(Dependency dependency);
 }

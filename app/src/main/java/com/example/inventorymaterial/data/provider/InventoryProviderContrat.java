@@ -21,7 +21,7 @@ public final class InventoryProviderContrat {
 
     }
 
-    public static class Depedency implements BaseColumns{
+    public static class Dependency implements BaseColumns{
         public static final String CONTENT_PATH="dependency";
         public static final Uri CONTENT_URI=Uri.withAppendedPath(InventoryProviderContrat.AUTHORITY_URI,CONTENT_PATH);
         public static final String NAME = "name";
